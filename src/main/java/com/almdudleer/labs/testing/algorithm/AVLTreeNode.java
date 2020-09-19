@@ -1,7 +1,7 @@
 package com.almdudleer.labs.testing.algorithm;
 
 public class AVLTreeNode<V extends Comparable<V>> {
-    private final V value;
+    private V value;
     private int height;
     private AVLTreeNode<V> leftNode;
     private AVLTreeNode<V> rightNode;
@@ -32,11 +32,36 @@ public class AVLTreeNode<V extends Comparable<V>> {
     }
 
     public AVLTreeNode<V> remove(V value) {
-        return null;
+        if (this.value.compareTo(value) > 0) {
+            if (leftNode != null)
+                leftNode = leftNode.remove(value);
+        } else if (this.value.compareTo(value) < 0) {
+            if (rightNode != null)
+                rightNode = rightNode.remove(value);
+        } else {
+            if (leftNode == null || rightNode == null) {
+                return leftNode == null ? rightNode : leftNode;
+            } else {
+                AVLTreeNode<V> leftMax = leftNode.findMax();
+                this.value = leftMax.value;
+                leftNode = leftNode.remove(this.value);
+            }
+        }
+        return rebalance();
     }
 
-    public AVLTreeNode<V> find(V value) {
-        return null;
+    public V find(V value) {
+        if (this.value.compareTo(value) > 0) {
+            if (leftNode != null)
+                return leftNode.find(value);
+            return null;
+        } else if (this.value.compareTo(value) < 0) {
+            if (rightNode != null)
+                return rightNode.find(value);
+            return null;
+        }
+        return this.value;
+
     }
 
     public void print() {
@@ -91,8 +116,18 @@ public class AVLTreeNode<V extends Comparable<V>> {
         return tmp;
     }
 
-    private AVLTreeNode<V> findMin(AVLTreeNode<V> node) {
-        return null;
+    private AVLTreeNode<V> findMin() {
+        if (leftNode != null) {
+            return leftNode.findMin();
+        }
+        return this;
+    }
+
+    private AVLTreeNode<V> findMax() {
+        if (rightNode != null) {
+            return rightNode.findMax();
+        }
+        return this;
     }
 
     private AVLTreeNode<V> removeMin(AVLTreeNode<V> node) {

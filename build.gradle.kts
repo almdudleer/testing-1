@@ -2,6 +2,18 @@ plugins {
     java
 }
 
+tasks {
+    javadoc {
+        options.encoding = "UTF-8"
+    }
+    compileJava {
+        options.encoding = "UTF-8"
+    }
+    compileTestJava {
+        options.encoding = "UTF-8"
+    }
+}
+
 group = "org.example"
 version = "1.0-SNAPSHOT"
 

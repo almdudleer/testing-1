@@ -12,16 +12,21 @@ public class TreeUsage {
         tree.insert(1);
         tree.insert(2);
         tree.insert(12);
-        tree.insert(2412);
-        tree.insert(3122);
-        tree.insert(123);
-        tree.insert(432);
-        tree.insert(241);
-        tree.insert(7853);
-        tree.insert(76);
-        tree.insert(15);
-        tree.insert(456);
-        tree.insert(1111);
+//        tree.insert(2412);
+//        tree.insert(3122);
+//        tree.insert(123);
+//        tree.insert(432);
+//        tree.insert(241);
+//        tree.insert(7853);
+//        tree.insert(76);
+//        tree.insert(15);
+//        tree.insert(456);
+//        tree.insert(1111);
         tree.print();
+        System.out.println("=========");
+        System.out.println("Ищем 7, вот же она:" + tree.find(7));
+        tree.remove(7);
+        tree.print();
+        System.out.println("Ищем 7, вот же она:" + tree.find(7));
     }
 }

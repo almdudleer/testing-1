@@ -17,11 +17,12 @@ public class AVLTree<V extends Comparable<V>> {
     }
 
     public void remove(V value) {
-        root = root.remove(value);
+        if (root != null)
+            root = root.remove(value);
     }
 
-    public void find(V value) {
-        root.find(value);
+    public V find(V value) {
+        return root.find(value);
     }
 
     public void print() {
