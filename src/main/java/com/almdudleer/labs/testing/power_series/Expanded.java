@@ -5,9 +5,10 @@ import java.util.function.BiFunction;
 public class Expanded {
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        System.out.println(arctan(1, 1.0e-6));
+        double x = -10000000;
+        System.out.println("Pred: " + arctan(x, 1.0e-20));
         long diff = System.currentTimeMillis() - start;
-        System.out.println(Math.PI/4);
+        System.out.println("Real: " + Math.atan(x));
         System.out.println("Took time: " + diff + "ms");
     }
 
