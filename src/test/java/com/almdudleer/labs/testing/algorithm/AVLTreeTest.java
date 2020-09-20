@@ -1,6 +1,5 @@
 package com.almdudleer.labs.testing.algorithm;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -27,7 +26,7 @@ class AVLTreeTest {
         return Files.list(Paths.get(TEST_RESOURCE_ROOT, "remove_tests"));
     }
 
-    @ParameterizedTest(name="Test {0}")
+    @ParameterizedTest(name = "Test {0}")
     @MethodSource("insertTestFiles")
     void insert(Path snapshotsFile) throws IOException {
         AVLTree<Double> avlTree = new AVLTree<>();
@@ -37,7 +36,7 @@ class AVLTreeTest {
         }
     }
 
-    @ParameterizedTest(name="Test {0}")
+    @ParameterizedTest(name = "Test {0}")
     @MethodSource("removeTestFiles")
     void remove(Path snapshotsFile) throws IOException {
         AVLTree<Double> avlTree = new AVLTree<>();
@@ -70,18 +69,18 @@ class AVLTreeTest {
         return snapshots;
     }
 
-     private static void applySnapshot(AVLTree<Double> avlTree, AVLTreeTestSnapshot snapshot) {
-         assertEquals(snapshot.json, avlTree.getJsonSnapshot());
-         if (snapshot.nextAction != null) {
-             Double value = Double.parseDouble(snapshot.nextActionArgument);
-             switch (snapshot.nextAction) {
-                 case "insert":
-                     avlTree.insert(value);
-                     break;
-                 case "remove":
-                     avlTree.remove(value);
-                     break;
-             }
-         }
-     }
+    private static void applySnapshot(AVLTree<Double> avlTree, AVLTreeTestSnapshot snapshot) {
+        assertEquals(snapshot.json, avlTree.getJsonSnapshot());
+        if (snapshot.nextAction != null) {
+            Double value = Double.parseDouble(snapshot.nextActionArgument);
+            switch (snapshot.nextAction) {
+                case "insert":
+                    avlTree.insert(value);
+                    break;
+                case "remove":
+                    avlTree.remove(value);
+                    break;
+            }
+        }
+    }
 }
