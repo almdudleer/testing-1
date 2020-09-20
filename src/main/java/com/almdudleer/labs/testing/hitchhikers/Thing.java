@@ -1,4 +1,12 @@
 package com.almdudleer.labs.testing.hitchhikers;
 
-public class Thing {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+public abstract class Thing {
+    @Getter
+    final String name;
+
+    public abstract void onInteract(Character character);
 }
