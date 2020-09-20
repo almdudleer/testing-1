@@ -34,9 +34,7 @@ public class AVLTree<V extends Comparable<V>> {
     }
 
     public String getJsonSnapshot() {
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
+        Gson gson = new GsonBuilder().create();
         return gson.toJson(root);
     }
 }
