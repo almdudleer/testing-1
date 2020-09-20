@@ -1,0 +1,18 @@
+null
+### insert 3.0
+{"value":3.0,"height":1}
+### insert 5.0
+{"value":3.0,"height":2,"rightNode":{"value":5.0,"height":1}}
+### remove 3.0
+{"value":5.0,"height":1}
+### insert 1.0
+{"value":5.0,"height":2,"leftNode":{"value":1.0,"height":1}}
+### insert 2.0
+{"value":2.0,"height":1,"leftNode":{"value":1.0,"height":1},"rightNode":{"value":5.0,"height":1}}
+### remove 1.0
+{"value":2.0,"height":2,"rightNode":{"value":5.0,"height":1}}
+### insert 12.0
+{"value":5.0,"height":2,"leftNode":{"value":2.0,"height":1},"rightNode":{"value":12.0,"height":1}}
+### remove 12.0
+{"value":5.0,"height":2,"leftNode":{"value":2.0,"height":1}}
+###

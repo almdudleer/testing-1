@@ -1,0 +1,16 @@
+null
+### insert 5.0
+{
+  "value": 5.0,
+  "height": 1
+}
+### insert 3.0
+{
+  "value": 5.0,
+  "height": 2,
+  "leftNode": {
+    "value": 3.0,
+    "height": 1
+  }
+}
+###
