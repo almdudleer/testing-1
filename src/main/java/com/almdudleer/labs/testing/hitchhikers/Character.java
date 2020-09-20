@@ -6,11 +6,20 @@ import lombok.Data;
 
 @Data
 public class Character {
+    String name;
     Location location;
     CharacterState state;
 
-    public void move(Location location) {
+    public Character(String name, Location location) {
+        this.name = name;
         this.location = location;
+        this.location.getCharactersHere().add(this);
+    }
+
+    public void move(Location location) {
+        this.location.getCharactersHere().remove(this);
+        this.location = location;
+        this.location.getCharactersHere().add(this);
     }
 
     public void interactWith(Thing thing) throws ThingNotFoundInCurrentLocationException {
