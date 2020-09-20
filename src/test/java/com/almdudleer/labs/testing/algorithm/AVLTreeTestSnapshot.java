@@ -10,7 +10,7 @@ public class AVLTreeTestSnapshot {
     String nextActionArgument;
 
     public AVLTreeTestSnapshot(String json, String nextAction, String nextActionArgument) {
-        Set<String> goodActions = new HashSet<>(Arrays.asList("insert", "remove"));
+        Set<String> goodActions = new HashSet<>(Arrays.asList("insert", "remove", null));
         if (!goodActions.contains(nextAction)) {
             throw new IllegalArgumentException("Action " + nextAction + " not recognized");
         }
