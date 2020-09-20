@@ -1,5 +1,6 @@
 package com.almdudleer.labs.testing.algorithm;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -16,13 +17,14 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AVLTreeTest {
+    public static final String TEST_RESOURCE_ROOT = "src/test/resources/algorithm";
 
     private static Stream<Path> insertTestFiles() throws IOException {
-        return Files.list(Paths.get("src/test/resources/algorithm/insert_tests"));
+        return Files.list(Paths.get(TEST_RESOURCE_ROOT, "insert_tests"));
     }
 
     private static Stream<Path> removeTestFiles() throws IOException {
-        return Files.list(Paths.get("src/test/resources/algorithm/remove_tests"));
+        return Files.list(Paths.get(TEST_RESOURCE_ROOT, "remove_tests"));
     }
 
     @ParameterizedTest(name="Test {0}")
@@ -35,7 +37,7 @@ class AVLTreeTest {
         }
     }
 
-    @ParameterizedTest(name="#{index} - Test from {0}")
+    @ParameterizedTest(name="Test {0}")
     @MethodSource("removeTestFiles")
     void remove(Path snapshotsFile) throws IOException {
         AVLTree<Double> avlTree = new AVLTree<>();
