@@ -1,5 +1,6 @@
 plugins {
     java
+    idea
 }
 
 tasks {
@@ -23,6 +24,7 @@ repositories {
 
 dependencies {
     implementation("com.google.code.gson:gson:2.8.6")
-    testImplementation("junit", "junit", "4.12")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2")
     compileOnly("org.projectlombok", "lombok", "1.18.12")
 }
