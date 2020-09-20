@@ -22,6 +22,7 @@ repositories {
 }
 
 dependencies {
+    implementation("com.google.code.gson:gson:2.8.6")
     testImplementation("junit", "junit", "4.12")
     compileOnly("org.projectlombok", "lombok", "1.18.12")
 }

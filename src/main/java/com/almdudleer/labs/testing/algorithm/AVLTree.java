@@ -1,6 +1,7 @@
 package com.almdudleer.labs.testing.algorithm;
 
-import java.util.Comparator;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class AVLTree<V extends Comparable<V>> {
     AVLTreeNode<V> root;
@@ -22,12 +23,20 @@ public class AVLTree<V extends Comparable<V>> {
     }
 
     public V find(V value) {
+        if (root == null)
+            return null;
         return root.find(value);
+
     }
 
     public void print() {
-        if (root != null)
-            root.print();
+        System.out.println(getJsonSnapshot());
+    }
 
+    public String getJsonSnapshot() {
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+        return gson.toJson(root);
     }
 }

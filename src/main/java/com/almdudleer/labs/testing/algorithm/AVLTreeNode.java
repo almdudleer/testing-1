@@ -64,24 +64,6 @@ public class AVLTreeNode<V extends Comparable<V>> {
 
     }
 
-    public void print() {
-        print("");
-    }
-
-    public void print(String prefix) {
-        System.out.println(prefix + "└-" + value);
-        if (leftNode != null) {
-            leftNode.print(prefix + "| ");
-        } else {
-            System.out.println(prefix + "| └-" + "X");
-        }
-        if (rightNode != null) {
-            rightNode.print(prefix + "| ");
-        } else {
-            System.out.println(prefix + "| └-" + "X");
-        }
-    }
-
     private void updateHeight() {
         int rightHeight = rightNode == null ? 0 : rightNode.height;
         int leftHeight = leftNode == null ? 0 : leftNode.height;
