@@ -1,5 +1,8 @@
 package com.almdudleer.labs.testing.algorithm;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class AVLTreeNode<V extends Comparable<V>> {
     private V value;
     private int height;
@@ -15,16 +18,14 @@ public class AVLTreeNode<V extends Comparable<V>> {
     public AVLTreeNode<V> insert(V value) {
         if (this.value.compareTo(value) > 0) {
             if (leftNode == null)
-                leftNode = new AVLTreeNode<V>(value);
+                leftNode = new AVLTreeNode<>(value);
             else
                 leftNode = leftNode.insert(value);
-            // Вставили где-то слева от себя
         } else if (this.value.compareTo(value) < 0) {
             if (rightNode == null)
-                rightNode = new AVLTreeNode<V>(value);
+                rightNode = new AVLTreeNode<>(value);
             else
                 rightNode = rightNode.insert(value);
-            // Вставили где-то справа от себя
         } else {
             System.out.println("Ну так-то ничего плохого, чтобы вставить дубликат, но лучше не надо");
         }
@@ -61,7 +62,6 @@ public class AVLTreeNode<V extends Comparable<V>> {
             return null;
         }
         return this.value;
-
     }
 
     private void updateHeight() {
@@ -81,9 +81,7 @@ public class AVLTreeNode<V extends Comparable<V>> {
         rightNode = tmp.leftNode;
         tmp.leftNode = this;
         updateHeight();
-        if (rightNode != null) {
-            rightNode.updateHeight();
-        }
+        tmp.updateHeight();
         return tmp;
     }
 
@@ -92,17 +90,8 @@ public class AVLTreeNode<V extends Comparable<V>> {
         leftNode = tmp.rightNode;
         tmp.rightNode = this;
         updateHeight();
-        if (leftNode != null) {
-            leftNode.updateHeight();
-        }
+        tmp.updateHeight();
         return tmp;
-    }
-
-    private AVLTreeNode<V> findMin() {
-        if (leftNode != null) {
-            return leftNode.findMin();
-        }
-        return this;
     }
 
     private AVLTreeNode<V> findMax() {
@@ -110,10 +99,6 @@ public class AVLTreeNode<V extends Comparable<V>> {
             return rightNode.findMax();
         }
         return this;
-    }
-
-    private AVLTreeNode<V> removeMin(AVLTreeNode<V> node) {
-        return null;
     }
 
     private AVLTreeNode<V> rebalance() {
@@ -129,5 +114,11 @@ public class AVLTreeNode<V extends Comparable<V>> {
             return rotateRight();
         }
         return this;
+    }
+
+
+    private String getJson() {
+        Gson gson = new GsonBuilder().create();
+        return gson.toJson(this);
     }
 }
