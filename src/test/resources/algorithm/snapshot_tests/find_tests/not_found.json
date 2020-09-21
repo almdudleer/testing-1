@@ -10,3 +10,5 @@ null
 ### insert 5.0
 {"value":2.0,"height":3,"leftNode":{"value":1.0,"height":1},"rightNode":{"value":4.0,"height":2,"leftNode":{"value":3.0,"height":1},"rightNode":{"value":5.0,"height":1}}}
 ### find 1.5 -> null
+{"value":2.0,"height":3,"leftNode":{"value":1.0,"height":1},"rightNode":{"value":4.0,"height":2,"leftNode":{"value":3.0,"height":1},"rightNode":{"value":5.0,"height":1}}}
+### find 0 -> null

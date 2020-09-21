@@ -1,12 +1,17 @@
 null
-### insert 2.0
-{"value":2.0,"height":1}
+### insert 3.0
+{"value":3.0,"height":1}
 ### insert 1.0
-{"value":2.0,"height":2,"leftNode":{"value":1.0,"height":1}}
+{"value":3.0,"height":2,"leftNode":{"value":1.0,"height":1}}
+### insert 6.0
+{"value":3.0,"height":2,"leftNode":{"value":1.0,"height":1},"rightNode":{"value":6.0,"height":1}}
+### insert 0.0
+{"value":3.0,"height":3,"leftNode":{"value":1.0,"height":2,"leftNode":{"value":0.0,"height":1}},"rightNode":{"value":6.0,"height":1}}
+### insert 2.0
+{"value":3.0,"height":3,"leftNode":{"value":1.0,"height":2,"leftNode":{"value":0.0,"height":1},"rightNode":{"value":2.0,"height":1}},"rightNode":{"value":6.0,"height":1}}
 ### insert 5.0
-{"value":2.0,"height":2,"leftNode":{"value":1.0,"height":1},"rightNode":{"value":5.0,"height":1}}
+{"value":3.0,"height":3,"leftNode":{"value":1.0,"height":2,"leftNode":{"value":0.0,"height":1},"rightNode":{"value":2.0,"height":1}},"rightNode":{"value":6.0,"height":2,"leftNode":{"value":5.0,"height":1}}}
 ### insert 7.0
-{"value":2.0,"height":3,"leftNode":{"value":1.0,"height":1},"rightNode":{"value":5.0,"height":2,"rightNode":{"value":7.0,"height":1}}}
-### remove 2.0
-{"value":5.0,"height":2,"leftNode":{"value":1.0,"height":1},"rightNode":{"value":7.0,"height":1}}
-###
+{"value":3.0,"height":3,"leftNode":{"value":1.0,"height":2,"leftNode":{"value":0.0,"height":1},"rightNode":{"value":2.0,"height":1}},"rightNode":{"value":6.0,"height":2,"leftNode":{"value":5.0,"height":1},"rightNode":{"value":7.0,"height":1}}}
+### remove 3.0
+{"value":2.0,"height":3,"leftNode":{"value":1.0,"height":2,"leftNode":{"value":0.0,"height":1}},"rightNode":{"value":6.0,"height":2,"leftNode":{"value":5.0,"height":1},"rightNode":{"value":7.0,"height":1}}}
