@@ -60,12 +60,20 @@ public class HitchHikersTest {
     }
 
     @Test
-    void testInteractionWithThingFromAnotherLocation() {
+    void testInteractionWithTableFromAnotherLocation() {
         room.thingsHere.add(table);
-        room.thingsHere.add(sofa);
-        room.thingsHere.add(award);
         assertThrows(ThingNotFoundInCurrentLocationException.class, () -> alice.interactWith(table));
+    }
+
+    @Test
+    void testInteractionWithSofaFromAnotherLocation() {
+        room.thingsHere.add(sofa);
         assertThrows(ThingNotFoundInCurrentLocationException.class, () -> alice.interactWith(sofa));
+    }
+
+    @Test
+    void testInteractionWithAwardFromAnotherLocation() {
+        room.thingsHere.add(award);
         assertThrows(ThingNotFoundInCurrentLocationException.class, () -> alice.interactWith(award));
     }
 
