@@ -62,7 +62,10 @@ public class AVLTreeTestSnapshot {
                     avlTree.remove(value);
                     break;
                 case "find":
-                    Double expectedResult = Double.parseDouble(snapshot.nextActionExpectedResult);
+                    Double expectedResult = null;
+                    if (!snapshot.nextActionExpectedResult.equals("null")) {
+                        expectedResult = Double.parseDouble(snapshot.nextActionExpectedResult);
+                    }
                     assertEquals(expectedResult, avlTree.find(value));
                     break;
             }
