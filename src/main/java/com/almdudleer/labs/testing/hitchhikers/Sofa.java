@@ -9,6 +9,7 @@ public class Sofa extends Thing {
 
     @Override
     public void onInteract(Character character) {
-    character.setState(CharacterState.SITTING);
+        System.out.println(character.getName() + " sits on " + this.getName());
+        character.setState(CharacterState.SITTING);
     }
 }

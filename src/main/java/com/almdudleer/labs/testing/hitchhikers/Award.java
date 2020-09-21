@@ -9,6 +9,7 @@ public class Award extends Thing {
 
     @Override
     public void onInteract(Character character) {
+        System.out.println(character.getName() + " admires " + this.getName());
         character.setState(CharacterState.ADMIRING);
     }
 }

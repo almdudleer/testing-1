@@ -10,6 +10,7 @@ public class Table extends Thing {
 
     @Override
     public void onInteract(Character character) {
+        System.out.println(character.getName() + " is drinking tea at " + this.getName());
         character.setState(CharacterState.TEA_DRINKING);
     }
 }

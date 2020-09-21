@@ -17,13 +17,21 @@ public class Character {
     }
 
     public void move(Location location) {
+        System.out.println(name + " tries to move to " + location.getName());
         this.location.getCharactersHere().remove(this);
         this.location = location;
         this.location.getCharactersHere().add(this);
+        System.out.println(name + " moves to " + location.getName());
     }
 
     public void interactWith(Thing thing) throws ThingNotFoundInCurrentLocationException {
+        System.out.println(name + " tries to interact with " + thing.getName());
         if (!location.getThingsHere().contains(thing)) {
+            System.out.println(name + " couldn't interact with "
+                    + thing.getName() + ", because " + name
+                    + " is in " + location.getName() + " and "
+                    + thing.getName() + " is not there."
+            );
             throw new ThingNotFoundInCurrentLocationException("Вещь \"" + thing.getName() + "\" не найдена в текущей локации");
         }
         thing.onInteract(this);
