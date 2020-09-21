@@ -1,0 +1,8 @@
+null
+### insert 3.0
+{"value":3.0,"height":1}
+### insert 2.0
+{"value":3.0,"height":2,"leftNode":{"value":2.0,"height":1}}
+### insert 1.0
+{"value":2.0,"height":2,"leftNode":{"value":1.0,"height":1},"rightNode":{"value":3.0,"height":1}}
+###

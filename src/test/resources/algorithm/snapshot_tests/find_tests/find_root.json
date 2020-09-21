@@ -1,0 +1,12 @@
+null
+### insert 1.0
+{"value":1.0,"height":1}
+### insert 2.0
+{"value":1.0,"height":2,"rightNode":{"value":2.0,"height":1}}
+### insert 3.0
+{"value":2.0,"height":2,"leftNode":{"value":1.0,"height":1},"rightNode":{"value":3.0,"height":1}}
+### insert 4.0
+{"value":2.0,"height":3,"leftNode":{"value":1.0,"height":1},"rightNode":{"value":3.0,"height":2,"rightNode":{"value":4.0,"height":1}}}
+### insert 5.0
+{"value":2.0,"height":3,"leftNode":{"value":1.0,"height":1},"rightNode":{"value":4.0,"height":2,"leftNode":{"value":3.0,"height":1},"rightNode":{"value":5.0,"height":1}}}
+### find 1.0 -> 1.0
