@@ -1,8 +1,5 @@
 package com.almdudleer.labs.testing.algorithm;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 public class AVLTreeNode<V extends Comparable<V>> {
     private V value;
     private int height;
@@ -114,11 +111,5 @@ public class AVLTreeNode<V extends Comparable<V>> {
             return rotateRight();
         }
         return this;
-    }
-
-
-    private String getJson() {
-        Gson gson = new GsonBuilder().create();
-        return gson.toJson(this);
     }
 }
