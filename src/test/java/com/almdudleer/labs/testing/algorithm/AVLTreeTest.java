@@ -26,40 +26,53 @@ class AVLTreeTest {
         return Files.list(Paths.get(TEST_RESOURCE_ROOT, "remove_tests"));
     }
 
-    @ParameterizedTest(name = "Test {0}")
+    private static Stream<Path> findTestFiles() throws IOException {
+        return Files.list(Paths.get(TEST_RESOURCE_ROOT, "find_tests"));
+    }
+
+    @ParameterizedTest(name = "Insert test {0}")
     @MethodSource("insertTestFiles")
     void insert(Path snapshotsFile) throws IOException {
         AVLTree<Double> avlTree = new AVLTree<>();
-        List<AVLTreeTestSnapshot> snapshots = readSnapshots(snapshotsFile);
+        List<AVLTreeTestSnapshot> snapshots = parseSnapshots(snapshotsFile);
         for (AVLTreeTestSnapshot snapshot : snapshots) {
             applySnapshot(avlTree, snapshot);
         }
     }
 
-    @ParameterizedTest(name = "Test {0}")
+    @ParameterizedTest(name = "Remove test {0}")
     @MethodSource("removeTestFiles")
     void remove(Path snapshotsFile) throws IOException {
         AVLTree<Double> avlTree = new AVLTree<>();
-        for (AVLTreeTestSnapshot snapshot : readSnapshots(snapshotsFile)) {
+        for (AVLTreeTestSnapshot snapshot : parseSnapshots(snapshotsFile)) {
             applySnapshot(avlTree, snapshot);
         }
     }
 
-    private static List<AVLTreeTestSnapshot> readSnapshots(Path file) throws IOException {
-        Pattern commandRegex = Pattern.compile("###( (.+) (.+))?");
-        List<String> lines = Files.readAllLines(file);
+    @ParameterizedTest(name = "Find test {0}")
+    @MethodSource("findTestFiles")
+    void find(Path snapshotsFile) throws IOException {
+        AVLTree<Double> avlTree = new AVLTree<>();
+        for (AVLTreeTestSnapshot snapshot : parseSnapshots(snapshotsFile)) {
+            applySnapshot(avlTree, snapshot);
+        }
+    }
+
+    private static List<AVLTreeTestSnapshot> parseSnapshots(Path file) throws IOException {
+        Pattern commandRegex = Pattern.compile("###( (?<command>\\w+))?( (?<argument>\\S+))?( -> (?<result>\\S+))?");
         List<AVLTreeTestSnapshot> snapshots = new ArrayList<>();
         StringBuilder currentSnapshotText = new StringBuilder();
-        for (String line : lines) {
-            if (line.startsWith("###")) {
-                Matcher m = commandRegex.matcher(line);
-                boolean found = m.find();
-                String action = found && m.groupCount() > 1 ? m.group(2) : null;
-                String argument = found && m.groupCount() > 1 ? m.group(3) : null;
+        for (String line : Files.readAllLines(file)) {
+            Matcher m = commandRegex.matcher(line);
+            if (m.find()) {
+                String action = m.group("command");
+                String argument = m.group("argument");
+                String expectedResult = m.group("result");
                 snapshots.add(new AVLTreeTestSnapshot(
                         currentSnapshotText.toString(),
                         action,
-                        argument
+                        argument,
+                        expectedResult
                 ));
                 currentSnapshotText = new StringBuilder();
             } else {
@@ -79,6 +92,10 @@ class AVLTreeTest {
                     break;
                 case "remove":
                     avlTree.remove(value);
+                    break;
+                case "find":
+                    Double expectedResult = Double.parseDouble(snapshot.nextActionExpectedResult);
+                    assertEquals(expectedResult, avlTree.find(value));
                     break;
             }
         }
