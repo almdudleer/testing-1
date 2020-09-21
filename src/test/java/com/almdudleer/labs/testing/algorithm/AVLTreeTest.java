@@ -18,42 +18,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class AVLTreeTest {
     public static final String TEST_RESOURCE_ROOT = "src/test/resources/algorithm";
 
-    private static Stream<Path> insertTestFiles() throws IOException {
-        return Files.list(Paths.get(TEST_RESOURCE_ROOT, "insert_tests"));
-    }
-
-    private static Stream<Path> removeTestFiles() throws IOException {
-        return Files.list(Paths.get(TEST_RESOURCE_ROOT, "remove_tests"));
-    }
-
     private static Stream<Path> findTestFiles() throws IOException {
-        return Files.list(Paths.get(TEST_RESOURCE_ROOT, "find_tests"));
+        return Files.find(Paths.get(TEST_RESOURCE_ROOT, "snapshot_tests"),
+                Integer.MAX_VALUE,
+                (filePath, fileAttr) -> fileAttr.isRegularFile() && filePath.getFileName().toString().endsWith(".json")
+        );
     }
 
-    @ParameterizedTest(name = "Insert test {0}")
-    @MethodSource("insertTestFiles")
-    void insert(Path snapshotsFile) throws IOException {
+    @ParameterizedTest(name = "Snapshot test from {0}")
+    @MethodSource("findTestFiles")
+    void snapshotTest(Path snapshotsFile) throws IOException {
         AVLTree<Double> avlTree = new AVLTree<>();
         List<AVLTreeTestSnapshot> snapshots = parseSnapshots(snapshotsFile);
         for (AVLTreeTestSnapshot snapshot : snapshots) {
-            applySnapshot(avlTree, snapshot);
-        }
-    }
-
-    @ParameterizedTest(name = "Remove test {0}")
-    @MethodSource("removeTestFiles")
-    void remove(Path snapshotsFile) throws IOException {
-        AVLTree<Double> avlTree = new AVLTree<>();
-        for (AVLTreeTestSnapshot snapshot : parseSnapshots(snapshotsFile)) {
-            applySnapshot(avlTree, snapshot);
-        }
-    }
-
-    @ParameterizedTest(name = "Find test {0}")
-    @MethodSource("findTestFiles")
-    void find(Path snapshotsFile) throws IOException {
-        AVLTree<Double> avlTree = new AVLTree<>();
-        for (AVLTreeTestSnapshot snapshot : parseSnapshots(snapshotsFile)) {
             applySnapshot(avlTree, snapshot);
         }
     }
