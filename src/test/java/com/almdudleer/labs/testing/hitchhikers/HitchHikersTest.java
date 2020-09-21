@@ -17,7 +17,7 @@ public class HitchHikersTest {
     Character lyosha;
     Character magrathean;
     Room room;
-    PlanetCatalogue planetCalalogue;
+    PlanetCatalogue planetCatalogue;
     CharacterGroup characterGroup;
     Award award;
     Sofa sofa;
@@ -26,11 +26,11 @@ public class HitchHikersTest {
     @BeforeEach
     void initObjects() {
         room = new Room();
-        planetCalalogue = new PlanetCatalogue();
+        planetCatalogue = new PlanetCatalogue();
         magrathean = new Character(null, room, Race.MAGRATHEAN);
-        alice = new Character("Алиса", planetCalalogue);
-        bob = new Character("Боб", planetCalalogue);
-        lyosha = new Character("Лёша", planetCalalogue);
+        alice = new Character("Алиса", planetCatalogue);
+        bob = new Character("Боб", planetCatalogue);
+        lyosha = new Character("Лёша", planetCatalogue);
         characterGroup = new CharacterGroup();
         characterGroup.add(alice);
         characterGroup.add(bob);
@@ -42,36 +42,44 @@ public class HitchHikersTest {
 
     @Test
     void moveCharacter() {
-        assertEquals(alice.location, planetCalalogue);
+        assertEquals(alice.location, planetCatalogue);
         alice.move(room);
         assertTrue(room.charactersHere.contains(alice));
         assertEquals(alice.location, room);
-        alice.move(planetCalalogue);
-        assertTrue(planetCalalogue.charactersHere.contains(alice));
-        assertEquals(alice.location, planetCalalogue);
+        alice.move(planetCatalogue);
+        assertTrue(planetCatalogue.charactersHere.contains(alice));
+        assertEquals(alice.location, planetCatalogue);
     }
 
     @Test
     void moveCharacterGroup() {
         characterGroup.move(room);
-        assertTrue(planetCalalogue.charactersHere.isEmpty());
+        assertTrue(planetCatalogue.charactersHere.isEmpty());
         characterGroup.forEach(character -> assertEquals(character.location, room));
         characterGroup.forEach(character -> assertTrue(room.charactersHere.contains(character)));
     }
 
     @Test
-    void testInteractionWithThingFromAnotherLocation() {
+    void testInteractionWithTableFromAnotherLocation() {
         room.thingsHere.add(table);
-        room.thingsHere.add(sofa);
-        room.thingsHere.add(award);
         assertThrows(ThingNotFoundInCurrentLocationException.class, () -> alice.interactWith(table));
+    }
+
+    @Test
+    void testInteractionWithSofaFromAnotherLocation() {
+        room.thingsHere.add(sofa);
         assertThrows(ThingNotFoundInCurrentLocationException.class, () -> alice.interactWith(sofa));
+    }
+
+    @Test
+    void testInteractionWithAwardFromAnotherLocation() {
+        room.thingsHere.add(award);
         assertThrows(ThingNotFoundInCurrentLocationException.class, () -> alice.interactWith(award));
     }
 
     @Test
     void testInteractionWithSofa() {
-        planetCalalogue.thingsHere.add(sofa);
+        planetCatalogue.thingsHere.add(sofa);
         lyosha.interactWith(sofa);
         assertEquals(lyosha.state, CharacterState.SITTING);
     }
@@ -91,23 +99,23 @@ public class HitchHikersTest {
 
     @Test
     void testInteractionWithTable() {
-        planetCalalogue.thingsHere.add(table);
+        planetCatalogue.thingsHere.add(table);
         lyosha.interactWith(table);
         assertEquals(lyosha.state, CharacterState.TEA_DRINKING);
     }
 
     @Test
     void testInteractionWithAward() {
-        planetCalalogue.thingsHere.add(award);
+        planetCatalogue.thingsHere.add(award);
         lyosha.interactWith(award);
         assertEquals(lyosha.state, CharacterState.ADMIRING);
     }
 
     @Test
     void testInteractionWithThings() {
-        planetCalalogue.thingsHere.add(sofa);
-        planetCalalogue.thingsHere.add(table);
-        planetCalalogue.thingsHere.add(award);
+        planetCatalogue.thingsHere.add(sofa);
+        planetCatalogue.thingsHere.add(table);
+        planetCatalogue.thingsHere.add(award);
         lyosha.interactWith(sofa);
         assertEquals(lyosha.state, CharacterState.SITTING);
         lyosha.interactWith(table);
