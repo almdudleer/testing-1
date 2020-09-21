@@ -1,7 +1,9 @@
 package com.almdudleer.labs.testing.hitchhikers;
 
+import com.almdudleer.labs.testing.hitchhikers.enumeration.CharacterInteractionType;
 import com.almdudleer.labs.testing.hitchhikers.enumeration.CharacterState;
-import com.almdudleer.labs.testing.hitchhikers.enumeration.WorldType;
+import com.almdudleer.labs.testing.hitchhikers.enumeration.Race;
+import com.almdudleer.labs.testing.hitchhikers.exceptions.CharacterNotFoundInCurrentLocationException;
 import com.almdudleer.labs.testing.hitchhikers.exceptions.ThingNotFoundInCurrentLocationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +15,7 @@ public class HitchHikersTest {
     Character alice;
     Character bob;
     Character lyosha;
+    Character magrathean;
     Room room;
     PlanetCatalogue planetCalalogue;
     CharacterGroup characterGroup;
@@ -24,6 +27,7 @@ public class HitchHikersTest {
     void initObjects() {
         room = new Room();
         planetCalalogue = new PlanetCatalogue();
+        magrathean = new Character(null, room, Race.MAGRATHEAN);
         alice = new Character("Алиса", planetCalalogue);
         bob = new Character("Боб", planetCalalogue);
         lyosha = new Character("Лёша", planetCalalogue);
@@ -70,6 +74,19 @@ public class HitchHikersTest {
         planetCalalogue.thingsHere.add(sofa);
         lyosha.interactWith(sofa);
         assertEquals(lyosha.state, CharacterState.SITTING);
+    }
+
+    @Test
+    void testInteractionWithMagratheanFromAnotherLocation() {
+        assertThrows(CharacterNotFoundInCurrentLocationException.class, () -> lyosha.interactWith(magrathean, CharacterInteractionType.LOOK));
+        assertEquals(CharacterState.IDLE, lyosha.state);
+    }
+
+    @Test
+    void testInteractionWithMagrathean() {
+        lyosha.move(room);
+        lyosha.interactWith(magrathean, CharacterInteractionType.LOOK);
+        assertEquals(CharacterState.LOOKING, lyosha.state);
     }
 
     @Test
