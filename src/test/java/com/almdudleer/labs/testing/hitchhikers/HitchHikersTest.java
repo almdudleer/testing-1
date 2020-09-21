@@ -42,13 +42,10 @@ public class HitchHikersTest {
 
     @Test
     void moveCharacter() {
-        assertEquals(alice.location, planetCatalogue);
         alice.move(room);
         assertTrue(room.charactersHere.contains(alice));
+        assertFalse(planetCatalogue.charactersHere.contains(alice));
         assertEquals(alice.location, room);
-        alice.move(planetCatalogue);
-        assertTrue(planetCatalogue.charactersHere.contains(alice));
-        assertEquals(alice.location, planetCatalogue);
     }
 
     @Test
