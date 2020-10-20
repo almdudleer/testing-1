@@ -28,6 +28,7 @@ tasks.withType<Test>().configureEach {
 
 dependencies {
     implementation("com.google.code.gson:gson:2.8.6")
+    implementation("com.opencsv:opencsv:4.6")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.1.0")
@@ -35,4 +36,5 @@ dependencies {
     annotationProcessor ("org.projectlombok:lombok:1.18.12")
     testCompileOnly ("org.projectlombok:lombok:1.18.12")
     testAnnotationProcessor ("org.projectlombok:lombok:1.18.12")
+    testImplementation("org.mockito:mockito-inline:3.4.0")
 }
