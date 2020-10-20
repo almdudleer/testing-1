@@ -12,6 +12,8 @@ public class MyMath {
     public static void main(String[] args) {
         MyMath myMath = new MyMath();
         System.out.println("Sin(x)");
+        System.out.println(myMath.sin(50, 10e-6) + " " + Math.sin(50));
+        System.out.println(myMath.sin(-10, 10e-6) + " " + Math.sin(-10));
         System.out.println(myMath.sin(Math.PI, 10e-6));
         System.out.println(myMath.sin(Math.PI / 2, 10e-6));
         System.out.println(myMath.sin(Math.PI / 3, 10e-6));
@@ -35,7 +37,7 @@ public class MyMath {
         BigInteger factorial = BigInteger.ONE;
         BigDecimal power = BigDecimal.valueOf(angle);
         sum = sum.add(term);
-        double diff = term.doubleValue();
+        double diff = Math.abs(term.doubleValue());
         while (diff > precision) {
             n++;
             int sign = n % 2 == 0 ? 1 : -1;
@@ -64,7 +66,10 @@ public class MyMath {
 
     public double ln(double x, double precision) {
         if (x < 0) {
-            throw new IllegalArgumentException();
+            return Double.NaN;
+        }
+        if (x == 0) {
+            return Double.NEGATIVE_INFINITY;
         }
         double x_;
         if (x > 2) {
