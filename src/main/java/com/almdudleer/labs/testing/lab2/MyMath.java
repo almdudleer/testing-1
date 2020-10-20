@@ -40,7 +40,8 @@ public class MyMath {
             int sign = n % 2 == 0 ? 1 : -1;
             power = power.multiply(x).multiply(x);
             factorial = factorial.multiply(BigInteger.valueOf(n * 2)).multiply(BigInteger.valueOf(n * 2 + 1));
-            BigDecimal nextTerm = BigDecimal.valueOf(sign).multiply(power).divide(new BigDecimal(factorial), MathContext.DECIMAL64);
+            BigDecimal nextTerm =
+                    BigDecimal.valueOf(sign).multiply(power).divide(new BigDecimal(factorial), MathContext.DECIMAL64);
             diff = nextTerm.subtract(term).abs().doubleValue();
             term = nextTerm;
             sum = sum.add(term);
@@ -84,7 +85,8 @@ public class MyMath {
             n++;
             int sign = n % 2 == 0 ? -1 : 1;
             power = power.multiply(arg);
-            BigDecimal nextTerm = BigDecimal.valueOf(sign).multiply(power).divide(BigDecimal.valueOf(n), MathContext.DECIMAL64);
+            BigDecimal nextTerm =
+                    BigDecimal.valueOf(sign).multiply(power).divide(BigDecimal.valueOf(n), MathContext.DECIMAL64);
             diff = nextTerm.subtract(term).abs().doubleValue();
             term = nextTerm;
             sum = sum.add(term);
@@ -101,4 +103,22 @@ public class MyMath {
         return ln(x, precision) / ln(base, precision);
     }
 
+    public static double complexLogFunction(double x, double precision) {
+        return Math.pow(((((log(2, x, precision) * log(3, x, precision))
+                * log(10, x, precision)) / Math.pow((log(2, x, precision) * log(5, x, precision)), 3))
+                - ln(x, precision)), 2);
+    }
+
+    public static double complexTrigonometricFunction(double x, double precision) {
+        return Math.pow((((cos(x, precision) + tan(x, precision)) + tan(x, precision)) - csc(x, precision)), 3)
+                - tan(x, precision);
+    }
+
+    public static double system(double x, double precision) {
+        if (x > 0) {
+            return complexLogFunction(x, precision);
+        } else {
+            return complexTrigonometricFunction(x, precision);
+        }
+    }
 }
