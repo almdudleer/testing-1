@@ -7,26 +7,27 @@ import java.math.MathContext;
 
 public class MyMath {
 
-    public static final int MIN_ITERATION = 1500;
+    public final int MIN_ITERATION = 1500;
 
     public static void main(String[] args) {
+        MyMath myMath = new MyMath();
         System.out.println("Sin(x)");
-        System.out.println(MyMath.sin(Math.PI, 10e-6));
-        System.out.println(MyMath.sin(Math.PI / 2, 10e-6));
-        System.out.println(MyMath.sin(Math.PI / 3, 10e-6));
-        System.out.println(MyMath.sin(Math.PI / 6, 10e-6));
+        System.out.println(myMath.sin(Math.PI, 10e-6));
+        System.out.println(myMath.sin(Math.PI / 2, 10e-6));
+        System.out.println(myMath.sin(Math.PI / 3, 10e-6));
+        System.out.println(myMath.sin(Math.PI / 6, 10e-6));
         System.out.println("Cos(x)");
-        System.out.println(MyMath.cos(Math.PI, 10e-6));
-        System.out.println(MyMath.cos(Math.PI / 2, 10e-6));
-        System.out.println(MyMath.cos(Math.PI / 3, 10e-6));
-        System.out.println(MyMath.cos(Math.PI / 6, 10e-6));
+        System.out.println(myMath.cos(Math.PI, 10e-6));
+        System.out.println(myMath.cos(Math.PI / 2, 10e-6));
+        System.out.println(myMath.cos(Math.PI / 3, 10e-6));
+        System.out.println(myMath.cos(Math.PI / 6, 10e-6));
         System.out.println("Ln(x)");
-        System.out.println(MyMath.ln(1.5, 10e-6));
-        System.out.println(MyMath.ln(Math.E, 10e-6));
-        System.out.println(MyMath.ln(Math.E * Math.E, 10e-6));
+        System.out.println(myMath.ln(1.5, 10e-6));
+        System.out.println(myMath.ln(Math.E, 10e-6));
+        System.out.println(myMath.ln(Math.E * Math.E, 10e-6));
     }
 
-    public static double sin(double angle, double precision) {
+    public double sin(double angle, double precision) {
         BigDecimal sum = BigDecimal.ZERO;
         long n = 0;
         BigDecimal x = BigDecimal.valueOf(angle);
@@ -49,19 +50,19 @@ public class MyMath {
         return sum.doubleValue();
     }
 
-    public static double cos(double x, double precision) {
+    public double cos(double x, double precision) {
         return Math.sqrt(Math.abs(1 - Math.pow(sin(x, precision * precision), 2)));
     }
 
-    public static double csc(double x, double precision) {
+    public double csc(double x, double precision) {
         return 1 / sin(x, precision);
     }
 
-    public static double tan(double x, double precision) {
+    public double tan(double x, double precision) {
         return sin(x, precision) / cos(x, precision);
     }
 
-    public static double ln(double x, double precision) {
+    public double ln(double x, double precision) {
         if (x < 0) {
             throw new IllegalArgumentException();
         }
@@ -99,22 +100,22 @@ public class MyMath {
         }
     }
 
-    public static double log(double base, double x, double precision) {
+    public double log(double base, double x, double precision) {
         return ln(x, precision) / ln(base, precision);
     }
 
-    public static double complexLogFunction(double x, double precision) {
+    public double complexLogFunction(double x, double precision) {
         return Math.pow(((((log(2, x, precision) * log(3, x, precision))
                 * log(10, x, precision)) / Math.pow((log(2, x, precision) * log(5, x, precision)), 3))
                 - ln(x, precision)), 2);
     }
 
-    public static double complexTrigonometricFunction(double x, double precision) {
+    public double complexTrigonometricFunction(double x, double precision) {
         return Math.pow((((cos(x, precision) + tan(x, precision)) + tan(x, precision)) - csc(x, precision)), 3)
                 - tan(x, precision);
     }
 
-    public static double system(double x, double precision) {
+    public double system(double x, double precision) {
         if (x > 0) {
             return complexLogFunction(x, precision);
         } else {
