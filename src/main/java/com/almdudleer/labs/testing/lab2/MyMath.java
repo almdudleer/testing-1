@@ -16,6 +16,7 @@ public class MyMath {
         System.out.println(Math.sin(50));
         System.out.println(myMath.sin(-50, 10e-6));
         System.out.println(Math.sin(-50));
+        System.out.println(myMath.cos(-4, 10e-6) + " " + Math.cos(-4));
 //        System.out.println(myMath.sin(Math.PI / 2, 10e-6));
 //        System.out.println(myMath.sin(Math.PI / 3, 10e-6));
 //        System.out.println(myMath.sin(Math.PI / 6, 10e-6));
@@ -55,11 +56,22 @@ public class MyMath {
             term = nextTerm;
             sum = sum.add(term);
         }
+        if (sum.compareTo(BigDecimal.ONE) > 0) {
+            sum = BigDecimal.ONE;
+        }
+        if (sum.compareTo(BigDecimal.ZERO.subtract(BigDecimal.ONE)) < 0) {
+            sum = BigDecimal.ZERO.subtract(BigDecimal.ONE);
+        }
         return angle > 0 ? sum.doubleValue() : -sum.doubleValue();
+
     }
 
     public double cos(double x, double precision) {
-        return Math.sqrt(Math.abs(1 - Math.pow(sin(x, precision * precision), 2)));
+        double sign = 1;
+        if (sin(x, precision) > sin(x+precision*2, precision)) {
+            sign = -1;
+        }
+        return sign * Math.sqrt(1 - Math.pow(sin(x, precision * precision), 2));
     }
 
     public double csc(double x, double precision) {
