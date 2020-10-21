@@ -37,4 +37,5 @@ dependencies {
     testCompileOnly ("org.projectlombok:lombok:1.18.12")
     testAnnotationProcessor ("org.projectlombok:lombok:1.18.12")
     testImplementation("org.mockito:mockito-inline:3.4.0")
+    implementation("org.mockito:mockito-inline:3.4.0")
 }

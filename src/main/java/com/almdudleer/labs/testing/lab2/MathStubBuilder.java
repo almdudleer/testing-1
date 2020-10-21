@@ -1,6 +1,5 @@
-package com.almdudleer.labs.testing.lab2.integration;
+package com.almdudleer.labs.testing.lab2;
 
-import com.almdudleer.labs.testing.lab2.MyMath;
 import com.opencsv.CSVReader;
 import org.mockito.Mockito;
 

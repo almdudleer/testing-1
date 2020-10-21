@@ -1,5 +1,6 @@
 package com.almdudleer.labs.testing.lab2.integration;
 
+import com.almdudleer.labs.testing.lab2.MathStubBuilder;
 import com.almdudleer.labs.testing.lab2.MyMath;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
