@@ -10,8 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ModuleLogger {
-    private static final MyMath myMath = new MyMath();
-    private static final double precision = 10E-4;
+    private final double precision;
+    private final MyMath myMath;
+    private final String logDirName;
 
     private static final List<String> moduleNames = Arrays.asList(
             "sin", "cos", "csc", "tan", "ln",
@@ -21,31 +22,54 @@ public class ModuleLogger {
 
 
     public static void main(String[] args) throws IOException {
-        double step = 2.5;
-        final double startX = -10;
-        final double endX = 10;
-        final String logDirName = "./out/logs";
+        double step = 0.5;
+        final double startX = -6;
+        final double endX = 6;
 
         if (args.length > 0) {
             step = Double.parseDouble(args[0]);
         }
 
-        writeAllModuleOutputs(startX, endX, step, logDirName);
+        ModuleLogger moduleLogger1 = new ModuleLogger(MathStubBuilder.createMathStub("sin", "cos", "ln", "tan", "csc", "log", "complexLogFunction", "complexTrigonometricFunction"), "./out/logs/integrationStep1", 10E-6);
+        ModuleLogger moduleLogger2 = new ModuleLogger(MathStubBuilder.createMathStub("sin", "cos", "ln", "tan", "csc", "log"), "./out/logs/integrationStep2", 10E-6);
+        ModuleLogger moduleLogger3 = new ModuleLogger(MathStubBuilder.createMathStub("sin", "cos", "ln"), "./out/logs/integrationStep3", 10E-4);
+        ModuleLogger moduleLogger4 = new ModuleLogger(new MyMath(), "./out/logs/integrationStep4", 10E-4);
+
+        if (args.length > 0) {
+            step = Double.parseDouble(args[0]);
+        }
+
+        moduleLogger1.writeModuleOutputs("system", step, startX, endX);
+        moduleLogger2.writeModuleOutputs("system", step, startX, endX);
+        moduleLogger3.writeModuleOutputs("system", step, startX, endX);
+        moduleLogger4.writeModuleOutputs("system", step, startX, endX);
     }
 
-    public static void writeAllModuleOutputs(
-            double startX,
-            double endX,
-            double step,
-            String logDirName
-    ) throws IOException {
+    public ModuleLogger(MyMath myMath, String logDirName, double precision) throws IOException {
+        this.myMath = myMath;
+        this.precision = precision;
 
+        File dir = new File(logDirName);
+        if (!dir.exists()) {
+            if (!dir.mkdirs()) {
+                throw new IOException("Could not create directory " + dir);
+            }
+        }
+
+        this.logDirName = logDirName;
+    }
+
+    public void writeAllModuleOutputs(
+            double step,
+            double startX,
+            double endX
+    ) throws IOException {
         for (String moduleName : moduleNames) {
-            writeModuleOutputs(startX, endX, step, logDirName, moduleName);
+            writeModuleOutputs(moduleName, step, startX, endX);
         }
     }
 
-    public static double calcModuleOutput(String moduleName, double x, double precision) {
+    public double calcModuleOutput(String moduleName, double x, double precision) {
         switch (moduleName) {
             case "sin":
                 return myMath.sin(x, precision);
@@ -76,26 +100,18 @@ public class ModuleLogger {
         }
     }
 
-    public static void writeModuleOutputs(
-            double startX,
-            double endX,
+    public void writeModuleOutputs(
+            String moduleName,
             double step,
-            String dirName,
-            String moduleName
+            double startX,
+            double endX
     ) throws IOException {
-        File dir = new File(dirName);
-        if (!dir.exists()) {
-            if (!dir.mkdirs()) {
-                throw new IOException("Could not create directory " + dir);
-            }
-        }
-
         List<String[]> outputs = new ArrayList<>();
         for (double x = startX; x < endX; x += step) {
             double output = calcModuleOutput(moduleName, x, precision);
             outputs.add(new String[]{Double.toString(x), Double.toString(output)});
         }
-        File file = new File(dirName, moduleName + ".csv");
+        File file = new File(logDirName, moduleName + ".csv");
         CSVWriter writer = new CSVWriter(new FileWriter(file));
         writer.writeAll(outputs, false);
         writer.flush();
