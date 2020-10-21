@@ -12,28 +12,36 @@ public class MyMath {
     public static void main(String[] args) {
         MyMath myMath = new MyMath();
         System.out.println("Sin(x)");
-        System.out.println(myMath.sin(Math.PI, 10e-6));
-        System.out.println(myMath.sin(Math.PI / 2, 10e-6));
-        System.out.println(myMath.sin(Math.PI / 3, 10e-6));
-        System.out.println(myMath.sin(Math.PI / 6, 10e-6));
-        System.out.println("Cos(x)");
-        System.out.println(myMath.cos(Math.PI, 10e-6));
-        System.out.println(myMath.cos(Math.PI / 2, 10e-6));
-        System.out.println(myMath.cos(Math.PI / 3, 10e-6));
-        System.out.println(myMath.cos(Math.PI / 6, 10e-6));
-        System.out.println("Ln(x)");
-        System.out.println(myMath.ln(1.5, 10e-6));
-        System.out.println(myMath.ln(Math.E, 10e-6));
-        System.out.println(myMath.ln(Math.E * Math.E, 10e-6));
+        System.out.println(myMath.sin(50, 10e-6));
+        System.out.println(Math.sin(50));
+        System.out.println(myMath.sin(-50, 10e-6));
+        System.out.println(Math.sin(-50));
+//        System.out.println(myMath.sin(Math.PI / 2, 10e-6));
+//        System.out.println(myMath.sin(Math.PI / 3, 10e-6));
+//        System.out.println(myMath.sin(Math.PI / 6, 10e-6));
+//        System.out.println("Cos(x)");
+//        System.out.println(myMath.cos(Math.PI, 10e-6));
+//        System.out.println(myMath.cos(Math.PI / 2, 10e-6));
+//        System.out.println(myMath.cos(Math.PI / 3, 10e-6));
+//        System.out.println(myMath.cos(Math.PI / 6, 10e-6));
+//        System.out.println("Ln(x)");
+//        System.out.println(myMath.ln(1.5, 10e-6));
+//        System.out.println(myMath.ln(Math.E, 10e-6));
+//        System.out.println(myMath.ln(Math.E * Math.E, 10e-6));
     }
 
     public double sin(double angle, double precision) {
+        double _angle = angle;
+        if (angle < 0) {
+            _angle = -angle;
+        }
+        _angle %= Math.PI * 2;
         BigDecimal sum = BigDecimal.ZERO;
         long n = 0;
-        BigDecimal x = BigDecimal.valueOf(angle);
-        BigDecimal term = BigDecimal.valueOf(angle);
+        BigDecimal x = BigDecimal.valueOf(_angle);
+        BigDecimal term = BigDecimal.valueOf(_angle);
         BigInteger factorial = BigInteger.ONE;
-        BigDecimal power = BigDecimal.valueOf(angle);
+        BigDecimal power = BigDecimal.valueOf(_angle);
         sum = sum.add(term);
         double diff = term.doubleValue();
         while (diff > precision) {
@@ -47,7 +55,7 @@ public class MyMath {
             term = nextTerm;
             sum = sum.add(term);
         }
-        return sum.doubleValue();
+        return angle > 0 ? sum.doubleValue() : -sum.doubleValue();
     }
 
     public double cos(double x, double precision) {
