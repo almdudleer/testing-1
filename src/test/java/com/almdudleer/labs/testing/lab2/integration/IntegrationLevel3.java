@@ -16,7 +16,7 @@ public class IntegrationLevel3 {
 
     @BeforeAll
     static void setUp() throws IOException {
-        math = MathStubBuilder.createMathStub(testPrecision, "sin", "cos", "ln");
+        math = MathStubBuilder.createMathStub("sin", "cos", "ln");
     }
 
     @ParameterizedTest

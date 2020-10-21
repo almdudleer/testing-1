@@ -6,50 +6,57 @@ import org.mockito.Mockito;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
+import static org.mockito.ArgumentMatchers.anyDouble;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 
 public class MathStubBuilder {
-    private static final String mockTablesPath = "src/test/resources/com/almdudleer/labs/testing/lab2/integration/mock_tables/";
+    private static final String mockTablesPath =
+            "src/test/resources/com/almdudleer/labs/testing/lab2/integration/mock_tables/";
 
-    public static MyMath createMathStub(double precision, String... stubFns) throws IOException {
-        MyMath mathMock = Mockito.mock(MyMath.class, Mockito.CALLS_REAL_METHODS);
-        for (String fn : stubFns) {
-            for (String[] line : new CSVReader(new FileReader( mockTablesPath + fn + ".csv")).readAll()) {
+    public static MyMath createMathStub(String... stubFns) throws IOException {
+        MyMath mathMock = Mockito.spy(new MyMath());
+        Set<String> stubFnsSet = new HashSet<>(Arrays.asList(stubFns));
+        for (String fn : stubFnsSet) {
+            for (String[] line : new CSVReader(new FileReader(mockTablesPath + fn + ".csv")).readAll()) {
                 double returnValue = Double.parseDouble(line[1]);
                 switch (fn) {
                     case "sin":
-                         doReturn(returnValue).when(mathMock).sin(Double.parseDouble(line[0]), precision);
+                        doReturn(returnValue).when(mathMock).sin(eq(Double.parseDouble(line[0])), anyDouble());
                         break;
                     case "cos":
-                         doReturn(returnValue).when(mathMock).cos(Double.parseDouble(line[0]), precision);
+                        doReturn(returnValue).when(mathMock).cos(eq(Double.parseDouble(line[0])), anyDouble());
                         break;
                     case "csc":
-                         doReturn(returnValue).when(mathMock).csc(Double.parseDouble(line[0]), precision);
+                        doReturn(returnValue).when(mathMock).csc(eq(Double.parseDouble(line[0])), anyDouble());
                         break;
                     case "tan":
-                         doReturn(returnValue).when(mathMock).tan(Double.parseDouble(line[0]), precision);
+                        doReturn(returnValue).when(mathMock).tan(eq(Double.parseDouble(line[0])), anyDouble());
                         break;
                     case "ln":
-                        doReturn(returnValue).when(mathMock).ln(Double.parseDouble(line[0]), precision);
+                        doReturn(returnValue).when(mathMock).ln(eq(Double.parseDouble(line[0])), anyDouble());
                         break;
                     case "log":
-                         doReturn(Double.parseDouble(line[2])).when(mathMock).log(
-                                Double.parseDouble(line[0]),
-                                Double.parseDouble(line[1]),
-                                precision
+                        doReturn(Double.parseDouble(line[2])).when(mathMock).log(
+                                eq(Double.parseDouble(line[0])),
+                                eq(Double.parseDouble(line[1])),
+                                anyDouble()
                         );
                         break;
                     case "complexLogFunction":
-                         doReturn(returnValue).when(mathMock)
-                                 .complexLogFunction(Double.parseDouble(line[0]), precision);
+                        doReturn(returnValue).when(mathMock)
+                                .complexLogFunction(eq(Double.parseDouble(line[0])), anyDouble());
                         break;
                     case "complexTrigonometricFunction":
-                         doReturn(returnValue).when(mathMock)
-                                .complexTrigonometricFunction(Double.parseDouble(line[0]), precision);
+                        doReturn(returnValue).when(mathMock)
+                                .complexTrigonometricFunction(eq(Double.parseDouble(line[0])), anyDouble());
                         break;
                     case "system":
-                         doReturn(returnValue).when(mathMock).system(Double.parseDouble(line[0]), precision);
+                        doReturn(returnValue).when(mathMock).system(eq(Double.parseDouble(line[0])), anyDouble());
                         break;
                     default:
                         throw new IllegalArgumentException("Unknown function: " + fn);

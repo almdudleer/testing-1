@@ -14,7 +14,7 @@ public class IntegrationLevel1 {
 
     @BeforeAll
     static void setUp() throws IOException {
-        math = MathStubBuilder.createMathStub(testPrecision, "complexLogFunction", "complexTrigonometricFunction");
+        math = MathStubBuilder.createMathStub("complexLogFunction", "complexTrigonometricFunction");
     }
 
     @ParameterizedTest
