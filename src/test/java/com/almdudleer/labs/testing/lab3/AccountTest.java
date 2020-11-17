@@ -24,6 +24,7 @@ public class AccountTest {
     @Test
     public void logInTest() {
         utils.logIn();
+        Assert.assertTrue(utils.isLoggedIn());
         Assert.assertNotEquals(driver.findElement(Utils.avatar), null);
     }
 
@@ -31,6 +32,7 @@ public class AccountTest {
     public void logOutTest() {
         utils.logIn();
         utils.logOut();
+        Assert.assertFalse(utils.isLoggedIn());
         Assert.assertNotEquals(driver.findElement(Utils.logInBtn), null);
         Assert.assertNotEquals(driver.findElement(Utils.signUpBtn), null);
     }
