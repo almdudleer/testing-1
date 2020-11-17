@@ -6,22 +6,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
 
 public class AccountTest {
     private WebDriver driver;
-    WebDriverWait wait;
     Utils utils;
 
     @Before
     public void setUp() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        wait = new WebDriverWait(driver, 20);
-        utils = new Utils(driver, wait);
+        utils = new Utils(driver);
     }
 
     @After
