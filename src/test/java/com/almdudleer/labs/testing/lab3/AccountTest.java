@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class AccountTest {
     private WebDriver driver;
@@ -13,8 +12,8 @@ public class AccountTest {
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
-        utils = new Utils(driver);
+        utils = new Utils();
+        this.driver = utils.getDriver();
     }
 
     @After

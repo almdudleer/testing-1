@@ -2,6 +2,7 @@ package com.almdudleer.labs.testing.lab3;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,8 +16,8 @@ public class Utils {
     public final WebDriver driver;
     public final WebDriverWait wait;
 
-    public Utils(WebDriver driver) {
-        this.driver = driver;
+    public Utils() {
+        this.driver = new ChromeDriver();
         this.wait = new WebDriverWait(driver, 10);
         driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
         driver.manage().window().maximize();
@@ -47,5 +48,9 @@ public class Utils {
 
     public boolean elementExists(By selector) {
         return driver.findElements(selector).size() != 0;
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 }
