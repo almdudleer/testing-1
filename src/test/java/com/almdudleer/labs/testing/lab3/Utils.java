@@ -25,25 +25,25 @@ public class Utils {
 
     public void logIn() {
         driver.get("https://app.photobucket.com");
-//        if (!isLoggedIn()) {
+        if (!isLoggedIn()) {
             driver.findElement(logInBtn).click();
             driver.findElement(By.id("login-loginfield")).sendKeys("prettyfrog");
             driver.findElement(By.id("login-pass")).sendKeys("qwerty123");
             driver.findElement(By.cssSelector(".Button-sc-1mhdsiq")).click();
             wait.until(ExpectedConditions.elementToBeClickable(avatar));
-//        }
+        }
     }
 
     public void logOut() {
         driver.get("https://app.photobucket.com/profile/account");
-//        if (isLoggedIn()) {
+        if (isLoggedIn()) {
             driver.findElement(avatar).click();
             driver.findElement(By.linkText("Log Out")).click();
-//        }
+        }
     }
 
     public boolean isLoggedIn() {
-        return elementExists(logInBtn);
+        return !driver.manage().getCookies().isEmpty() && driver.manage().getCookieNamed("app_auth") != null;
     }
 
     public boolean elementExists(By selector) {
