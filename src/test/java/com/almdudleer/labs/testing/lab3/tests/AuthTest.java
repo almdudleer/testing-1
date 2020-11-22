@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import static com.almdudleer.labs.testing.lab3.utils.Elements.avatar;
 
-public class AccountTest {
+public class AuthTest {
     Common common;
 
     @Before

@@ -1,6 +1,6 @@
 package com.almdudleer.labs.testing.lab3.utils;
 
-import com.almdudleer.labs.testing.lab3.pages.AccountPage;
+import com.almdudleer.labs.testing.lab3.pages.ProfilePage;
 import com.almdudleer.labs.testing.lab3.pages.LoginPage;
 import org.openqa.selenium.By;
 
@@ -26,8 +26,8 @@ public class Actions {
 
     public void logOut() {
         if (storage.isLoggedIn()) {
-            AccountPage accountPage = new AccountPage(utils);
-            accountPage.go();
+            ProfilePage profilePage = new ProfilePage(utils);
+            profilePage.go();
             utils.driver.findElement(avatar).click();
             utils.driver.findElement(By.linkText("Log Out")).click();
         }
