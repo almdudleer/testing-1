@@ -1,7 +1,7 @@
 package com.almdudleer.labs.testing.lab3.utils;
 
-import com.almdudleer.labs.testing.lab3.pages.ProfilePage;
 import com.almdudleer.labs.testing.lab3.pages.LoginPage;
+import com.almdudleer.labs.testing.lab3.pages.ProfilePage;
 import org.openqa.selenium.By;
 
 import static com.almdudleer.labs.testing.lab3.utils.Elements.avatar;
@@ -20,7 +20,6 @@ public class Actions {
             LoginPage loginPage = new LoginPage(utils);
             loginPage.go();
             loginPage.logIn("prettyfrog", "qwerty123");
-
         }
     }
 

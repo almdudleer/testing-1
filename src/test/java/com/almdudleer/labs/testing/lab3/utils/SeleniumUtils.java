@@ -21,8 +21,4 @@ public class SeleniumUtils {
     public boolean elementExists(By selector) {
         return driver.findElements(selector).size() != 0;
     }
-
-    public WebDriver getDriver() {
-        return driver;
-    }
 }
