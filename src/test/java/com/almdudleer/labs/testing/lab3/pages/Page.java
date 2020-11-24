@@ -3,7 +3,7 @@ package com.almdudleer.labs.testing.lab3.pages;
 import com.almdudleer.labs.testing.lab3.utils.SeleniumUtils;
 
 public abstract class Page {
-    SeleniumUtils utils;
+    public SeleniumUtils utils;
     public static String URL;
 
     // TODO: think of a better way of managing utils

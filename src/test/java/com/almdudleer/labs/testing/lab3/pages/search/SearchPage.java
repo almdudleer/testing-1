@@ -1,5 +1,6 @@
-package com.almdudleer.labs.testing.lab3.pages;
+package com.almdudleer.labs.testing.lab3.pages.search;
 
+import com.almdudleer.labs.testing.lab3.pages.Page;
 import com.almdudleer.labs.testing.lab3.utils.SeleniumUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

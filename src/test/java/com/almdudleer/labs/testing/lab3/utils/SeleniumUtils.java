@@ -13,8 +13,8 @@ public class SeleniumUtils {
 
     public SeleniumUtils() {
         this.driver = new ChromeDriver();
-        this.wait = new WebDriverWait(driver, 10);
-        driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+        this.wait = new WebDriverWait(driver, 20);
+        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
 
