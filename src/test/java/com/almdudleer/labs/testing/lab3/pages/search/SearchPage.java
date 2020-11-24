@@ -12,15 +12,21 @@ public class SearchPage extends Page {
     public SearchPage(SeleniumUtils utils) {
         super(utils);
         URL = "https://app.photobucket.com/search";
+        anchor = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/form/div/input");
     }
 
     public List<WebElement> search(String query) {
-        utils.driver.findElement(By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/form/div/input"))
-                .sendKeys(query);
+        utils.driver.findElement(By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/form/div/input")).sendKeys(query);
         utils.driver.findElement(By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/form/div/button")).click();
         utils.wait.until(ExpectedConditions.textToBe(By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/h3"), "Search results for “frog”"));
-//        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[2]/div/div/div[2]/div")));
         return utils.driver.findElements(By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[2]/div/div/div[2]/div"));
+    }
 
+    public SearchResultView openSearchResult(List<WebElement> searchResults, int num) {
+        utils.wait.until(ExpectedConditions.elementToBeClickable(searchResults.get(num)));
+        searchResults.get(num).click();
+        utils.wait.until(ExpectedConditions.presenceOfElementLocated(By
+                .xpath("//*[@id=\"overflow-container\"]/div[1]/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]")));
+        return new SearchResultView(utils);
     }
 }
