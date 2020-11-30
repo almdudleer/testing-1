@@ -17,6 +17,6 @@ public class LoginPage extends Page {
     public void logIn(String login, String password)  {
         utils.driver.findElement(loginField).sendKeys(login);
         utils.driver.findElement(passField).sendKeys(password);
-        utils.driver.findElement(signInBtn).click();
+        utils.clickElement(signInBtn);
     }
 }

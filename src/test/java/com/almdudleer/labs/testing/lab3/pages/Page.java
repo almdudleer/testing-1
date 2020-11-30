@@ -6,8 +6,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public abstract class Page {
     public SeleniumUtils utils;
-    public static String URL;
+    public String URL;
     public static By anchor;
+    public static final By acceptCookieBtn = By.linkText("Got it!");
 
     // TODO: think of a better way of managing utils
     public Page(SeleniumUtils utils) {

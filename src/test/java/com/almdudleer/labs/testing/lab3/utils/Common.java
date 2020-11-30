@@ -6,7 +6,7 @@ package com.almdudleer.labs.testing.lab3.utils;
  */
 public class Common {
     public SeleniumUtils utils;
-    public Actions actions;
+    public CustomActions customActions;
     public Storage storage;
 
     public Common() {
@@ -14,7 +14,7 @@ public class Common {
 
         // We may combine the following classes:
         storage = new Storage(utils);
-        actions = new Actions(utils, storage);
+        customActions = new CustomActions(utils, storage);
     }
 
     public void tearDown() {

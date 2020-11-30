@@ -25,33 +25,33 @@ public class AuthTest {
 
     @Test
     public void logInTestCookie() {
-        common.actions.logInCorrect();
+        common.customActions.logInCorrect();
         common.utils.wait.until(ExpectedConditions.elementToBeClickable(avatar));
         Assert.assertTrue(common.storage.isLoggedIn());
     }
 
     @Test
     public void logInTestAvatar() {
-        common.actions.logInCorrect();
+        common.customActions.logInCorrect();
         common.utils.wait.until(ExpectedConditions.elementToBeClickable(avatar));
         Assert.assertTrue(common.utils.elementExists(avatar));
     }
 
     @Test
     public void logOutTestCookie() {
-        common.actions.logInCorrect();
+        common.customActions.logInCorrect();
         common.utils.wait.until(ExpectedConditions.elementToBeClickable(avatar));
-        common.actions.logOut();
+        common.customActions.logOut();
         Assert.assertFalse(common.storage.isLoggedIn());
     }
 
     @Test
     public void logOutTestButtons() {
-        common.actions.logInCorrect();
+        common.customActions.logInCorrect();
         common.utils.wait.until(ExpectedConditions.elementToBeClickable(avatar));
-        common.actions.logOut();
+        common.customActions.logOut();
 
-        ExplorePage explorePage = new ExplorePage(common.utils);
+        ExplorePage explorePage = new ExplorePage(common);
         explorePage.go();
 
         Assert.assertTrue(common.utils.elementExists(ExplorePage.logInBtn));
