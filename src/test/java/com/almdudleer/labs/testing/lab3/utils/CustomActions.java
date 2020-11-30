@@ -24,6 +24,7 @@ public class CustomActions {
             LoginPage loginPage = new LoginPage(utils);
             loginPage.go();
             loginPage.logIn("prettyfrog", "qwerty123");
+            utils.wait.until(ExpectedConditions.elementToBeClickable(avatar));
             utils.clickElement(Page.acceptCookieBtn);
         }
     }

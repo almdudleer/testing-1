@@ -11,7 +11,7 @@ import java.util.List;
 public class SearchPage extends Page {
     public SearchPage(SeleniumUtils utils) {
         super(utils);
-        URL = "https://app.photobucket.com/search";
+        Url = "https://app.photobucket.com/search";
         anchor = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/form/div/input");
     }
 

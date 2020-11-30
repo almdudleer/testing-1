@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public abstract class Page {
     public SeleniumUtils utils;
-    public String URL;
+    public String Url;
     public static By anchor;
     public static final By acceptCookieBtn = By.linkText("Got it!");
 
@@ -16,7 +16,7 @@ public abstract class Page {
     }
 
     public void go() {
-        this.utils.driver.get(URL);
+        this.utils.driver.get(Url);
         waitOpen();
     }
 

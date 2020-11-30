@@ -2,9 +2,7 @@ package com.almdudleer.labs.testing.lab3.pages.profile;
 
 import com.almdudleer.labs.testing.lab3.pages.Page;
 import com.almdudleer.labs.testing.lab3.utils.Common;
-import com.almdudleer.labs.testing.lab3.utils.SeleniumUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class BillingPage extends Page {
@@ -26,7 +24,7 @@ public class BillingPage extends Page {
     public BillingPage(Common common) {
         super(common.utils);
         this.common = common;
-        URL = "https://app.photobucket.com/profile/account/billing";
+        Url = "https://app.photobucket.com/profile/account/billing";
     }
 
     public void chooseAnnualPlan() {

@@ -10,7 +10,7 @@ public class LoginPage extends Page {
 
     public LoginPage(SeleniumUtils utils) {
         super(utils);
-        URL = "https://app.photobucket.com/login";
+        Url = "https://app.photobucket.com/login";
         anchor = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[2]/div[1]");
     }
 

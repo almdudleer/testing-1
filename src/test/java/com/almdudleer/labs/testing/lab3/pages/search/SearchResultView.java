@@ -14,7 +14,7 @@ public class SearchResultView extends Page {
 
     public SearchResultView(SeleniumUtils utils) {
         super(utils);
-        URL = null;
+        Url = null;
         anchor = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div/div/div[2]/div[2]/div[2]/aside");
     }
 

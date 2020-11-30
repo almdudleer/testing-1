@@ -31,7 +31,6 @@ public class UpgradePlanTest {
     @Test
     public void upgradePlanTest() {
         common.customActions.logInCorrect();
-        common.utils.wait.until(ExpectedConditions.elementToBeClickable(avatar));
         explorePage.go();
         explorePage.upgradeYourPlan();
         billingPage.buyExpertPlan();
