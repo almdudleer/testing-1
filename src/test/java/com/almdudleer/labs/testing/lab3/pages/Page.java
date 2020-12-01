@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public abstract class Page {
     public SeleniumUtils utils;
     public String Url;
-    public static By anchor;
+    public By anchor;
     public static final By acceptCookieBtn = By.linkText("Got it!");
 
     // TODO: think of a better way of managing utils
@@ -21,7 +21,8 @@ public abstract class Page {
     }
 
     public void waitOpen() {
-        utils.wait.until(ExpectedConditions.presenceOfElementLocated(anchor));
+        if (anchor != null)
+            utils.wait.until(ExpectedConditions.presenceOfElementLocated(anchor));
     }
 
 }
