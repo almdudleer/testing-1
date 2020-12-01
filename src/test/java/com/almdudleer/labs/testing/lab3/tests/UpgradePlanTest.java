@@ -69,4 +69,40 @@ public class UpgradePlanTest {
         billingPage.chooseMonthlyPlan();
         Assertions.assertEquals("$12.99\na month", billingPage.getExpertPlanCost());
     }
+
+    @Test
+    void testIncorrectCardNumber() {
+        common.customActions.logInCorrect();
+        explorePage.go();
+        explorePage.upgradeYourPlan();
+        billingPage.buyExpertPlan();
+        billingPage.payWithCard();
+        billingPage.enterCardNumber("1234 1234 1234 1234");
+        common.utils.driver.findElement(BillingPage.cardholderNameInput).sendKeys("");
+        Assertions.assertEquals("This card number is not valid.", billingPage.getCardNumberErrorMessageText());
+    }
+
+    @Test
+    void testIncorrectCardCvvCode() {
+        common.customActions.logInCorrect();
+        explorePage.go();
+        explorePage.upgradeYourPlan();
+        billingPage.buyExpertPlan();
+        billingPage.payWithCard();
+        billingPage.enterCardCvvCode("1");
+        common.utils.driver.findElement(BillingPage.cardholderNameInput).sendKeys("");
+        Assertions.assertEquals("This security code is not valid.", billingPage.getCvvNumberErrorMessageText());
+    }
+
+    @Test
+    void testIncorrectExpirationDate() {
+        common.customActions.logInCorrect();
+        explorePage.go();
+        explorePage.upgradeYourPlan();
+        billingPage.buyExpertPlan();
+        billingPage.payWithCard();
+        billingPage.enterCardExpirationDay("1");
+        common.utils.driver.findElement(BillingPage.cardholderNameInput).sendKeys("");
+        Assertions.assertEquals("This expiration date is not valid.", billingPage.getExpirationDateErrorMessageText());
+    }
 }

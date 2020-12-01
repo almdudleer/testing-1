@@ -18,6 +18,9 @@ public class BillingPage extends Page {
     public static final By cvvInput = By.xpath("//*[@id=\"cvv\"]");
     public static final By agreeCheckbox = By.xpath("//*[@id=\"userAgreements\"]");
     public static final By submitBtn = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[2]/div[3]/div/div/button");
+    public static final By cardNumberErrorMessage = By.xpath("//*[@id=\"braintree-dropin-container\"]/div[1]/div[1]/div[5]/div[5]/div[6]/div[2]/div[2]/div");
+    public static final By expirationDateErrorMessage = By.xpath("//*[@id=\"braintree-dropin-container\"]/div[1]/div[1]/div[5]/div[5]/div[6]/div[2]/div[3]/div[1]/div");
+    public static final By cvvCodeErrorMessage = By.xpath("//*[@id=\"braintree-dropin-container\"]/div[1]/div[1]/div[5]/div[5]/div[6]/div[2]/div[3]/div[2]/div");
 
     private final Common common;
 
@@ -83,5 +86,20 @@ public class BillingPage extends Page {
     public String getExpertPlanCost() {
         utils.wait.until(ExpectedConditions.presenceOfElementLocated(expertPlanPrice));
         return utils.driver.findElement(expertPlanPrice).getText();
+    }
+
+    public String getCardNumberErrorMessageText() {
+        utils.wait.until(ExpectedConditions.presenceOfElementLocated(cardNumberErrorMessage));
+        return utils.driver.findElement(cardNumberErrorMessage).getText();
+    }
+
+    public String getCvvNumberErrorMessageText() {
+        utils.wait.until(ExpectedConditions.presenceOfElementLocated(cvvCodeErrorMessage));
+        return utils.driver.findElement(cvvCodeErrorMessage).getText();
+    }
+
+    public String getExpirationDateErrorMessageText() {
+        utils.wait.until(ExpectedConditions.presenceOfElementLocated(expirationDateErrorMessage));
+        return utils.driver.findElement(expirationDateErrorMessage).getText();
     }
 }
