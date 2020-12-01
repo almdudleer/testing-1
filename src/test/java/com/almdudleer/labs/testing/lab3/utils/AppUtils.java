@@ -8,17 +8,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static com.almdudleer.labs.testing.lab3.utils.Elements.avatar;
 
-public class CustomActions {
+public class AppUtils {
     public final SeleniumUtils utils;
-    private final Storage storage;
 
-    public CustomActions(SeleniumUtils utils, Storage storage) {
+    public AppUtils(SeleniumUtils utils) {
         this.utils = utils;
-        this.storage = storage;
     }
 
     public void logInCorrect() {
-        if (!storage.isLoggedIn()) {
+        if (!isLoggedIn()) {
             LoginPage loginPage = new LoginPage(utils);
             loginPage.go();
             loginPage.logIn("prettyfrog", "qwerty123");
@@ -28,12 +26,17 @@ public class CustomActions {
     }
 
     public void logOut() {
-        if (storage.isLoggedIn()) {
+        if (isLoggedIn()) {
             ProfilePage profilePage = new ProfilePage(utils);
             profilePage.go();
             utils.driver.findElement(avatar).click();
             utils.driver.findElement(By.linkText("Log Out")).click();
         }
+    }
+
+    public boolean isLoggedIn() {
+        return !utils.driver.manage().getCookies().isEmpty() && utils.driver.manage()
+                .getCookieNamed("app_auth") != null;
     }
 
 }

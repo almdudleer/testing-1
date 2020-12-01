@@ -32,7 +32,7 @@ public class UploadImageTest {
     @Test
     void uploadValidJpgToBucket() throws URISyntaxException {
         By uploadedImage = By.xpath("//img[contains(@alt, 'the_most_random_pic_name')]");
-        common.customActions.logInCorrect();
+        common.appUtils.logInCorrect();
         uploadPage.go();
         uploadPage.fillFileField("com/almdudleer/labs/testing/lab3/the_most_random_pic_name.jpg");
         uploadPage.submitUploadedFiles();
@@ -48,7 +48,7 @@ public class UploadImageTest {
     @Test
     void uploadValidImageToNewAlbum() throws URISyntaxException {
         By uploadedImage = By.xpath("//img[contains(@alt, 'the_most_random_pic_name')]");
-        common.customActions.logInCorrect();
+        common.appUtils.logInCorrect();
         uploadPage.go();
         uploadPage.fillFileField("com/almdudleer/labs/testing/lab3/the_most_random_pic_name.jpg");
         common.utils.clickElement(UploadPage.chooseAnotherAlbumBtn);

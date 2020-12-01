@@ -14,7 +14,7 @@ public class SearchResultViewTest {
     @BeforeEach
     public void setUp() {
         common = new Common();
-        common.customActions.logInCorrect();
+        common.appUtils.logInCorrect();
         SearchPage searchPage = new SearchPage(common.utils);
         searchPage.go();
         searchPage.search("frog");

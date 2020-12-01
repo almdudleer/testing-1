@@ -1,7 +1,6 @@
 package com.almdudleer.labs.testing.lab3.tests.images;
 
 import com.almdudleer.labs.testing.lab3.pages.images.BucketPage;
-import com.almdudleer.labs.testing.lab3.pages.images.UploadPage;
 import com.almdudleer.labs.testing.lab3.utils.Common;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -28,7 +27,7 @@ public class AlbumTest {
     @Test
     void testAddAlbum() {
         String albumName = "Best Album Ever";
-        common.customActions.logInCorrect();
+        common.appUtils.logInCorrect();
         bucketPage.go();
         bucketPage.addAlbum(albumName);
         Assertions.assertEquals(albumName, bucketPage.getAlbumsNames().get(0));
@@ -37,7 +36,7 @@ public class AlbumTest {
     @Test
     void testAddAndDeleteAlbum() {
         String albumName = UUID.randomUUID().toString();
-        common.customActions.logInCorrect();
+        common.appUtils.logInCorrect();
         bucketPage.go();
         bucketPage.addAlbum(albumName);
         bucketPage.deleteAlbumByIndex(0); // Мб стоит переписать на byName, но пока лень

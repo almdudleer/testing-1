@@ -17,7 +17,7 @@ public class PersonalInfoTest {
     @Before
     public void setUp() {
         common = new Common();
-        common.customActions.logInCorrect();
+        common.appUtils.logInCorrect();
         page = new PersonalInfoPage(common.utils);
         page.go();
     }

@@ -30,7 +30,7 @@ public class UpgradePlanTest {
 
     @Test
     public void upgradePlanTest() {
-        common.customActions.logInCorrect();
+        common.appUtils.logInCorrect();
         explorePage.go();
         explorePage.upgradeYourPlan();
         billingPage.buyExpertPlan();
@@ -45,7 +45,7 @@ public class UpgradePlanTest {
 
     @Test
     void testSwitchToAnnual() {
-        common.customActions.logInCorrect();
+        common.appUtils.logInCorrect();
         common.utils.wait.until(ExpectedConditions.elementToBeClickable(avatar));
         billingPage.go();
         billingPage.chooseAnnualPlan();
@@ -54,7 +54,7 @@ public class UpgradePlanTest {
 
     @Test
     void testSwitchToMonthly() {
-        common.customActions.logInCorrect();
+        common.appUtils.logInCorrect();
         common.utils.wait.until(ExpectedConditions.elementToBeClickable(avatar));
         billingPage.go();
         Assertions.assertEquals("$12.99\na month", billingPage.getExpertPlanCost());
@@ -62,7 +62,7 @@ public class UpgradePlanTest {
 
     @Test
     void testSwitchToAnnualThemBackToMonthly() {
-        common.customActions.logInCorrect();
+        common.appUtils.logInCorrect();
         common.utils.wait.until(ExpectedConditions.elementToBeClickable(avatar));
         billingPage.go();
         billingPage.chooseAnnualPlan();
@@ -72,7 +72,7 @@ public class UpgradePlanTest {
 
     @Test
     void testIncorrectCardNumber() {
-        common.customActions.logInCorrect();
+        common.appUtils.logInCorrect();
         explorePage.go();
         explorePage.upgradeYourPlan();
         billingPage.buyExpertPlan();
@@ -84,7 +84,7 @@ public class UpgradePlanTest {
 
     @Test
     void testIncorrectCardCvvCode() {
-        common.customActions.logInCorrect();
+        common.appUtils.logInCorrect();
         explorePage.go();
         explorePage.upgradeYourPlan();
         billingPage.buyExpertPlan();
@@ -96,7 +96,7 @@ public class UpgradePlanTest {
 
     @Test
     void testIncorrectExpirationDate() {
-        common.customActions.logInCorrect();
+        common.appUtils.logInCorrect();
         explorePage.go();
         explorePage.upgradeYourPlan();
         billingPage.buyExpertPlan();
