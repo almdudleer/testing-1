@@ -15,12 +15,11 @@ public class BucketPage extends Page {
     public final static By createAlbumBtn = By.xpath("//*[@id=\"root\"]/div[4]/div[3]");
     public final static By newAlbumNameInput = By.className("gallery-album-title-input");
     public final static By albumsTitles = By.className("AlbumTitle-sc-1s262m9");
-    public final static By albumsTiles = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[2]/div[3]/div[1]/div[1]/div/div[2]");
+    public final static By albumsTiles = By.className("gallery-album-container");
     public final static By deleteAlbumBtn = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[2]/div[1]/div/div[9]");
     public final static By confirmDeleteBtn = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div/div[1]/button[2]");
     public final static By cancelDeleteBtn = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div/div[1]/button[1]");
-
-
+    public final static By deleteImageBtn = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[2]/div[1]/div/div[9]");
 
     private final Common common;
 
@@ -50,5 +49,26 @@ public class BucketPage extends Page {
         utils.clickElement(deleteAlbumBtn);
         utils.clickElement(confirmDeleteBtn);
         utils.wait.until(ExpectedConditions.numberOfElementsToBeLessThan(albumsTitles, albumsCount));
+    }
+
+    public void deleteAlbumByName(String name) {
+        utils.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(albumsTiles, 0));
+        WebElement album = utils.driver.findElements(albumsTiles).stream()
+                .filter(webElement -> webElement.getText().equals(name))
+                .findAny()
+                .orElse(null);
+        album.click();
+        utils.clickElement(deleteAlbumBtn);
+        utils.clickElement(confirmDeleteBtn);
+    }
+
+
+    public void deleteAllImagesLocated(By by) {
+        utils.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(by, 0));
+        utils.driver.findElements(by).forEach(webElement -> {
+            webElement.click();
+            utils.clickElement(deleteImageBtn);
+            utils.clickElement(confirmDeleteBtn);
+        });
     }
 }
