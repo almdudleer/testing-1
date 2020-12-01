@@ -3,9 +3,9 @@ package com.almdudleer.labs.testing.lab3.tests.profile;
 import com.almdudleer.labs.testing.lab3.pages.profile.PersonalInfoPage;
 import com.almdudleer.labs.testing.lab3.utils.Common;
 import com.almdudleer.labs.testing.lab3.utils.Elements;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +14,7 @@ public class PersonalInfoTest {
     Common common;
     PersonalInfoPage page;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         common = new Common();
         common.appUtils.logInCorrect();
@@ -22,9 +22,9 @@ public class PersonalInfoTest {
         page.go();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
-        common.utils.driver.quit();
+        common.tearDown();
     }
 
     @Test

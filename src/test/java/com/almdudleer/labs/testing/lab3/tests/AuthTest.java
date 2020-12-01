@@ -2,10 +2,10 @@ package com.almdudleer.labs.testing.lab3.tests;
 
 import com.almdudleer.labs.testing.lab3.pages.ExplorePage;
 import com.almdudleer.labs.testing.lab3.utils.Common;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static com.almdudleer.labs.testing.lab3.utils.Elements.avatar;
@@ -13,14 +13,14 @@ import static com.almdudleer.labs.testing.lab3.utils.Elements.avatar;
 public class AuthTest {
     Common common;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         common = new Common();
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
-        common.utils.driver.quit();
+        common.tearDown();
     }
 
     @Test

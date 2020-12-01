@@ -25,7 +25,7 @@ public class UpgradePlanTest {
 
     @AfterEach
     public void tearDown() {
-        common.utils.driver.quit();
+        common.tearDown();
     }
 
     @Test
