@@ -3,30 +3,42 @@ package com.almdudleer.labs.testing.lab3.pages.search;
 import com.almdudleer.labs.testing.lab3.pages.Page;
 import com.almdudleer.labs.testing.lab3.utils.SeleniumUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.List;
-
 public class SearchPage extends Page {
+    By allCommunityToggle = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/div[1]/div[1]");
+    By yourBucketToggle = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/div[1]/div[2]");
+    public By searchInput = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/form/div/input");
+    public By searchTitle = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/h3");
+
     public SearchPage(SeleniumUtils utils) {
         super(utils);
         Url = "https://app.photobucket.com/search";
-        anchor = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/form/div/input");
+        anchor = searchInput;
     }
 
-    public List<WebElement> search(String query) {
+    public void search(String query) {
         utils.driver.findElement(By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/form/div/input")).sendKeys(query);
         utils.driver.findElement(By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/form/div/button")).click();
-        utils.wait.until(ExpectedConditions.textToBe(By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/h3"), "Search results for “frog”"));
-        return utils.driver.findElements(By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[2]/div/div/div[2]/div"));
+        utils.wait.until(ExpectedConditions.textToBe(searchTitle, "Search results for “" + query + "”"));
     }
 
-    public SearchResultView openSearchResult(List<WebElement> searchResults, int num) {
-        utils.wait.until(ExpectedConditions.elementToBeClickable(searchResults.get(num)));
-        searchResults.get(num).click();
-        utils.wait.until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath("//*[@id=\"overflow-container\"]/div[1]/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]")));
-        return new SearchResultView(utils);
+    public SearchResultView openSearchResult(int num) {
+        By res = getSearchResultSelector(num);
+        SearchResultView resView = new SearchResultView(utils, res);
+        resView.go();
+        return resView;
+    }
+
+    public void selectAllCommunityToggle() {
+        utils.clickElement(allCommunityToggle);
+    }
+
+    public void selectYourBucketToggle() {
+        utils.clickElement(yourBucketToggle);
+    }
+
+    public By getSearchResultSelector(int num) {
+        return By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[2]/div/div/div[2]/div[" + num + "]");
     }
 }

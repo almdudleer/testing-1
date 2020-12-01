@@ -6,9 +6,6 @@ import com.almdudleer.labs.testing.lab3.utils.Common;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 public class SearchResultViewTest {
     Common common;
@@ -20,8 +17,8 @@ public class SearchResultViewTest {
         common.customActions.logInCorrect();
         SearchPage searchPage = new SearchPage(common.utils);
         searchPage.go();
-        List<WebElement> foundElements = searchPage.search("frog");
-        searchResultView = searchPage.openSearchResult(foundElements, 3);
+        searchPage.search("frog");
+        searchResultView = searchPage.openSearchResult(3);
     }
 
     @AfterEach

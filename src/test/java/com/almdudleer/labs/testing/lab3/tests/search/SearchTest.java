@@ -5,24 +5,19 @@ import com.almdudleer.labs.testing.lab3.utils.Common;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.List;
 
 public class SearchTest {
     Common common;
-    List<WebElement> foundElements;
+    SearchPage searchPage;
 
     @BeforeEach
     public void setUp() {
         common = new Common();
         common.customActions.logInCorrect();
-        SearchPage searchPage = new SearchPage(common.utils);
+        searchPage = new SearchPage(common.utils);
         searchPage.go();
-        foundElements = searchPage.search("frog");
-        common.utils.wait.until(ExpectedConditions.elementToBeClickable(foundElements.get(3)));
+        searchPage.search("frog");
     }
 
     @AfterEach
@@ -32,11 +27,19 @@ public class SearchTest {
 
     @Test
     void findFrogImage() {
-        foundElements.get(3).click();
-        common.utils.wait.until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath("/html/body/div[2]/div[2]/div[2]/div[1]/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]")));
-
+        searchPage.openSearchResult(3);
     }
 
+    @Test
+    void yourBucketToggle() {
+        searchPage.selectYourBucketToggle();
+        common.utils.wait.until(ExpectedConditions.textToBe(searchPage.searchTitle, "No search results for “frog”"));
+    }
 
+    @Test
+    void allCommunityToggle() {
+        searchPage.selectYourBucketToggle();
+        searchPage.selectAllCommunityToggle();
+        common.utils.wait.until(ExpectedConditions.textToBe(searchPage.searchTitle, "Search results for “frog”"));
+    }
 }

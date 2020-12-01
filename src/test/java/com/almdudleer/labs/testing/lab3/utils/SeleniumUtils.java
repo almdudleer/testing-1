@@ -3,7 +3,6 @@ package com.almdudleer.labs.testing.lab3.utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -14,7 +13,7 @@ public class SeleniumUtils {
     public final WebDriverWait wait;
 
     public SeleniumUtils() {
-        this.driver = new OperaDriver();
+        this.driver = new ChromeDriver();
         this.wait = new WebDriverWait(driver, 30);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
