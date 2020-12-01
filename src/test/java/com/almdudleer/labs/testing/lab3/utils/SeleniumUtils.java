@@ -2,7 +2,9 @@ package com.almdudleer.labs.testing.lab3.utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -24,7 +26,20 @@ public class SeleniumUtils {
     }
 
     public void clickElement(By selector) {
+        getClickableElement(selector).click();
+    }
+
+    public WebElement getClickableElement(By selector) {
         wait.until(ExpectedConditions.elementToBeClickable(selector));
-        driver.findElement(selector).click();
+        scrollToElement(selector);
+        return driver.findElement(selector);
+    }
+
+    public void scrollToElement(By by) {
+        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+        WebElement element = driver.findElement(by);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element);
+        actions.perform();
     }
 }

@@ -4,14 +4,12 @@ import com.almdudleer.labs.testing.lab3.pages.LoginPage;
 import com.almdudleer.labs.testing.lab3.pages.Page;
 import com.almdudleer.labs.testing.lab3.pages.profile.ProfilePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static com.almdudleer.labs.testing.lab3.utils.Elements.avatar;
 
 public class CustomActions {
-    private final SeleniumUtils utils;
+    public final SeleniumUtils utils;
     private final Storage storage;
 
     public CustomActions(SeleniumUtils utils, Storage storage) {
@@ -38,11 +36,4 @@ public class CustomActions {
         }
     }
 
-    public void scrollToElement(By by) {
-        utils.wait.until(ExpectedConditions.presenceOfElementLocated(by));
-        WebElement element = utils.driver.findElement(by);
-        Actions actions = new Actions(utils.driver);
-        actions.moveToElement(element);
-        actions.perform();
-    }
 }

@@ -39,7 +39,7 @@ public class BillingPage extends Page {
     }
 
     public void buyExpertPlan() {
-        common.customActions.scrollToElement(buyExpertPlanBtn);
+        common.utils.scrollToElement(buyExpertPlanBtn);
         utils.clickElement(buyExpertPlanBtn);
     }
 
@@ -48,38 +48,38 @@ public class BillingPage extends Page {
     }
 
     public void enterCardholderName(String name) {
-        common.customActions.scrollToElement(cardholderNameInput);
+        common.utils.scrollToElement(cardholderNameInput);
         utils.driver.findElement(cardholderNameInput).sendKeys(name);
     }
 
     public void enterCardNumber(String cardNumber) {
         utils.driver.switchTo().frame(utils.driver.findElement(By.xpath("//*[@id=\"braintree-hosted-field-number\"]")));
-        common.customActions.scrollToElement(cardNumberInput);
+        common.utils.scrollToElement(cardNumberInput);
         utils.driver.findElement(cardNumberInput).sendKeys(cardNumber);
         utils.driver.switchTo().defaultContent();
     }
 
     public void enterCardExpirationDay(String date) {
         utils.driver.switchTo().frame(utils.driver.findElement(By.xpath("//*[@id=\"braintree-hosted-field-expirationDate\"]")));
-        common.customActions.scrollToElement(expirationDateInput);
+        common.utils.scrollToElement(expirationDateInput);
         utils.driver.findElement(expirationDateInput).sendKeys(date);
         utils.driver.switchTo().defaultContent();
     }
 
     public void enterCardCvvCode(String cvv) {
         utils.driver.switchTo().frame(utils.driver.findElement(By.xpath("//*[@id=\"braintree-hosted-field-cvv\"]")));
-        common.customActions.scrollToElement(cvvInput);
+        common.utils.scrollToElement(cvvInput);
         utils.driver.findElement(cvvInput).sendKeys(cvv);
         utils.driver.switchTo().defaultContent();
     }
 
     public void acceptTermsOfService() {
-        common.customActions.scrollToElement(agreeCheckbox);
+        common.utils.scrollToElement(agreeCheckbox);
         utils.clickElement(agreeCheckbox);
     }
 
     public void submitCardForm() {
-        common.customActions.scrollToElement(submitBtn);
+        common.utils.scrollToElement(submitBtn);
         utils.clickElement(submitBtn);
     }
 
