@@ -1,5 +1,6 @@
-package com.almdudleer.labs.testing.lab3.pages;
+package com.almdudleer.labs.testing.lab3.pages.auth;
 
+import com.almdudleer.labs.testing.lab3.pages.Page;
 import com.almdudleer.labs.testing.lab3.utils.SeleniumUtils;
 import org.openqa.selenium.By;
 

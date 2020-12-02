@@ -1,7 +1,6 @@
 package com.almdudleer.labs.testing.lab3.utils;
 
-import com.almdudleer.labs.testing.lab3.pages.LoginPage;
-import com.almdudleer.labs.testing.lab3.pages.Page;
+import com.almdudleer.labs.testing.lab3.pages.auth.LoginPage;
 import com.almdudleer.labs.testing.lab3.pages.profile.ProfilePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,7 +23,7 @@ public class AppUtils {
             loginPage.go();
             loginPage.logIn(LOGIN, PASSWORD);
             utils.wait.until(ExpectedConditions.elementToBeClickable(avatar));
-            utils.clickElement(Page.acceptCookieBtn);
+            acceptCookies();
         }
     }
 
@@ -40,6 +39,10 @@ public class AppUtils {
     public boolean isLoggedIn() {
         return !utils.driver.manage().getCookies().isEmpty() && utils.driver.manage()
                 .getCookieNamed("app_auth") != null;
+    }
+
+    public void acceptCookies() {
+        utils.clickElement(Elements.acceptCookieBtn);
     }
 
     public String getAlertText() {

@@ -1,10 +1,11 @@
-package com.almdudleer.labs.testing.lab3.tests;
+package com.almdudleer.labs.testing.lab3.tests.auth;
 
 import com.almdudleer.labs.testing.lab3.pages.ExplorePage;
+import com.almdudleer.labs.testing.lab3.pages.auth.LoginPage;
 import com.almdudleer.labs.testing.lab3.utils.Common;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static com.almdudleer.labs.testing.lab3.utils.Elements.avatar;
@@ -22,6 +23,15 @@ public class AuthTest {
     @AfterEach
     public void tearDown() {
         common.tearDown();
+    }
+
+    @Test
+    public void testPathToPage() {
+        ExplorePage explorePage = new ExplorePage(common.utils);
+        LoginPage loginPage = new LoginPage(common.utils);
+        explorePage.go();
+        explorePage.toLoginPage();
+        loginPage.waitOpen();
     }
 
     @Test
@@ -52,7 +62,7 @@ public class AuthTest {
         common.utils.wait.until(ExpectedConditions.elementToBeClickable(avatar));
         common.appUtils.logOut();
 
-        ExplorePage explorePage = new ExplorePage(common);
+        ExplorePage explorePage = new ExplorePage(common.utils);
         explorePage.go();
 
         assertTrue(common.utils.elementExists(ExplorePage.logInBtn));

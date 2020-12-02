@@ -1,4 +1,4 @@
-package com.almdudleer.labs.testing.lab3.tests;
+package com.almdudleer.labs.testing.lab3.tests.profile;
 
 import com.almdudleer.labs.testing.lab3.pages.ExplorePage;
 import com.almdudleer.labs.testing.lab3.pages.profile.BillingPage;
@@ -19,7 +19,7 @@ public class UpgradePlanTest {
     @BeforeEach
     public void setUp() {
         common = new Common();
-        explorePage = new ExplorePage(common);
+        explorePage = new ExplorePage(common.utils);
         billingPage = new BillingPage(common);
     }
 
