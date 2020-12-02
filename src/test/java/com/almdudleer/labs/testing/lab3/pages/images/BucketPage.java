@@ -14,7 +14,7 @@ public class BucketPage extends Page {
     public final static By addAlbumBtn = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[1]/div[4]");
     public final static By createAlbumBtn = By.xpath("//*[@id=\"root\"]/div[4]/div[3]");
     public final static By newAlbumNameInput = By.className("gallery-album-title-input");
-    public final static By albumsTitles = By.className("AlbumTitle-sc-1s262m9");
+    public final static By albumsTitles = By.xpath("//div[contains(@class, 'AlbumTitle')]");
     public final static By albumsTiles = By.className("gallery-album-container");
     public final static By deleteAlbumBtn = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div[2]/div[1]/div/div[9]");
     public final static By confirmDeleteBtn = By.xpath("//*[@id=\"overflow-container\"]/div[1]/div/div[1]/button[2]");
@@ -35,20 +35,13 @@ public class BucketPage extends Page {
         utils.wait.until(ExpectedConditions.presenceOfElementLocated(newAlbumNameInput));
         utils.driver.findElement(newAlbumNameInput).sendKeys(Keys.chord(Keys.CONTROL, "a"), albumName, Keys.ENTER);
         utils.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(albumsTitles, albumsCount));
+        utils.driver.findElement(By.tagName("body")).sendKeys("");
     }
 
     public List<String> getAlbumsNames() {
         return utils.driver.findElements(albumsTitles).stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
-    }
-
-    public void deleteAlbumByIndex(int index) {
-        int albumsCount = utils.driver.findElements(albumsTitles).size();
-        utils.driver.findElements(albumsTiles).get(index).click();
-        utils.clickElement(deleteAlbumBtn);
-        utils.clickElement(confirmDeleteBtn);
-        utils.wait.until(ExpectedConditions.numberOfElementsToBeLessThan(albumsTitles, albumsCount));
     }
 
     public void deleteAlbumByName(String name) {
@@ -65,7 +58,9 @@ public class BucketPage extends Page {
 
     public void deleteAllImagesLocated(By by) {
         utils.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(by, 0));
+        System.out.println(utils.driver.findElements(by));
         utils.driver.findElements(by).forEach(webElement -> {
+            common.utils.scrollToElement(webElement);
             webElement.click();
             utils.clickElement(deleteImageBtn);
             utils.clickElement(confirmDeleteBtn);

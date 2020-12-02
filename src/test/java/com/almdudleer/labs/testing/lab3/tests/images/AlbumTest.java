@@ -39,7 +39,8 @@ public class AlbumTest {
         common.appUtils.logInCorrect();
         bucketPage.go();
         bucketPage.addAlbum(albumName);
-        bucketPage.deleteAlbumByIndex(0); // Мб стоит переписать на byName, но пока лень
-        Assertions.assertNotEquals(albumName, bucketPage.getAlbumsNames().get(0));
+        bucketPage.go();
+        bucketPage.deleteAlbumByName(albumName);
+        Assertions.assertFalse(bucketPage.getAlbumsNames().contains(albumName));
     }
 }

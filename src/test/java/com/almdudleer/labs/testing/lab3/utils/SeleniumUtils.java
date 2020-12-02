@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -16,7 +17,7 @@ public class SeleniumUtils {
     public final WebDriverWait wait;
 
     public SeleniumUtils() {
-        this.driver = new FirefoxDriver();
+        this.driver = new OperaDriver();
         this.wait = new WebDriverWait(driver, 30);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
@@ -39,6 +40,13 @@ public class SeleniumUtils {
     public void scrollToElement(By by) {
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
         WebElement element = driver.findElement(by);
+        Actions actions = new Actions(driver);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        actions.moveToElement(element);
+        actions.perform();
+    }
+
+    public void scrollToElement(WebElement element) {
         Actions actions = new Actions(driver);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
         actions.moveToElement(element);

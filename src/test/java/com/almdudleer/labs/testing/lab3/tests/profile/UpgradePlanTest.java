@@ -101,7 +101,7 @@ public class UpgradePlanTest {
         explorePage.upgradeYourPlan();
         billingPage.buyExpertPlan();
         billingPage.payWithCard();
-        billingPage.enterCardExpirationDay("1");
+        billingPage.enterCardExpirationDay("0101");
         common.utils.driver.findElement(BillingPage.cardholderNameInput).sendKeys("");
         Assertions.assertEquals("This expiration date is not valid.", billingPage.getExpirationDateErrorMessageText());
     }
