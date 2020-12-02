@@ -3,7 +3,7 @@ package com.almdudleer.labs.testing.lab3.tests.profile;
 import com.almdudleer.labs.testing.lab3.pages.profile.PersonalInfoPage;
 import com.almdudleer.labs.testing.lab3.utils.Common;
 import com.almdudleer.labs.testing.lab3.utils.Elements;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -66,9 +66,25 @@ public class PersonalInfoTest {
     }
 
     @Test
+    public void emailWithSpace() {
+        page.enterEmail("asd fgh@nail.ru");
+        page.saveChanges();
+        assertEquals("Email is not valid.", common.appUtils.getAlertText());
+    }
+
+    @Test
+    public void emailWithoutAt() {
+        page.enterEmail("asdfghnail.ru");
+        page.saveChanges();
+        assertEquals("Email is not valid.", common.appUtils.getAlertText());
+        common.utils.clickElement(Elements.alertBtn);
+    }
+
+    // Alert tests
+    @Test
     public void alertCloseBtn() {
         updateFirstName();
-        assertEquals("Everything was saved successfully!", common.utils.getClickableElement(Elements.alertSpan).getText());
+        assertEquals("Everything was saved successfully!", common.appUtils.getAlertText());
         common.utils.clickElement(Elements.alertBtn);
         common.utils.wait.until(ExpectedConditions.invisibilityOfElementLocated(Elements.alertSpan));
     }
@@ -78,22 +94,6 @@ public class PersonalInfoTest {
         updateFirstName();
         common.utils.wait.until(ExpectedConditions.visibilityOfElementLocated(Elements.alertSpan));
         common.utils.wait.until(ExpectedConditions.invisibilityOfElementLocated(Elements.alertSpan));
-    }
-
-    @Test
-    public void emailWithSpace() {
-        page.enterEmail("asd fgh@nail.ru");
-        page.saveChanges();
-        assertEquals("Email is not valid.", common.utils.getClickableElement(Elements.alertSpan).getText());
-        common.utils.clickElement(Elements.alertBtn);
-    }
-
-    @Test
-    public void emailWithoutAt() {
-        page.enterEmail("asdfghnail.ru");
-        page.saveChanges();
-        assertEquals("Email is not valid.", common.utils.getClickableElement(Elements.alertSpan).getText());
-        common.utils.clickElement(Elements.alertBtn);
     }
 
 }

@@ -42,6 +42,10 @@ public class AppUtils {
                 .getCookieNamed("app_auth") != null;
     }
 
+    public String getAlertText() {
+        return utils.getClickableElement(Elements.alertSpan).getText();
+    }
+
     public String changeString(String s) {
         return nextChar(s.charAt(0)) + s.substring(1);
     }
