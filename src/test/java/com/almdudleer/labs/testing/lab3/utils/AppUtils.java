@@ -11,6 +11,9 @@ import static com.almdudleer.labs.testing.lab3.utils.Elements.avatar;
 public class AppUtils {
     public final SeleniumUtils utils;
 
+    public final String LOGIN = "prettyfrog";
+    public final String PASSWORD = "qwerty123";
+
     public AppUtils(SeleniumUtils utils) {
         this.utils = utils;
     }
@@ -19,7 +22,7 @@ public class AppUtils {
         if (!isLoggedIn()) {
             LoginPage loginPage = new LoginPage(utils);
             loginPage.go();
-            loginPage.logIn("prettyfrog", "qwerty123");
+            loginPage.logIn(LOGIN, PASSWORD);
             utils.wait.until(ExpectedConditions.elementToBeClickable(avatar));
             utils.clickElement(Page.acceptCookieBtn);
         }
@@ -39,4 +42,15 @@ public class AppUtils {
                 .getCookieNamed("app_auth") != null;
     }
 
+    public String changeString(String s) {
+        return nextChar(s.charAt(0)) + s.substring(1);
+    }
+
+    public char nextChar(char character) {
+        if (character >= 'A' && character <= 'z')
+            return (char) (character != 'z' ? character + 1 : 'A');
+        else if (character >= '0' && character <= '9')
+            return (char) (character != '9' ? character + 1 : '0');
+        else return '0';
+    }
 }

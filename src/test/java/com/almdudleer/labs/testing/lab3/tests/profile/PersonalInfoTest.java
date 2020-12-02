@@ -29,21 +29,21 @@ public class PersonalInfoTest {
 
     @Test
     public void updateFirstName() {
-        String newFirstName = nextChar(page.getFirstName().charAt(0)) + page.getFirstName().substring(1);
+        String newFirstName = common.appUtils.changeString(page.getFirstName());
         page.enterFirstName(newFirstName);
         assertTrue(page.saveChanges());
     }
 
     @Test
     public void updateLastName() {
-        String newLastName = nextChar(page.getLastName().charAt(0)) + page.getLastName().substring(1);
+        String newLastName = common.appUtils.changeString(page.getFirstName());
         page.enterLastName(newLastName);
         assertTrue(page.saveChanges());
     }
 
     @Test
     public void updateZipCode() {
-        String newZipCode = nextChar(page.getZipCode().charAt(0)) + page.getZipCode().substring(1);
+        String newZipCode = common.appUtils.changeString(page.getFirstName());
         page.enterZipCode(newZipCode);
         assertTrue(page.saveChanges());
     }
@@ -96,11 +96,4 @@ public class PersonalInfoTest {
         common.utils.clickElement(Elements.alertBtn);
     }
 
-    public char nextChar(char character) {
-        if (character >= 'A' && character <= 'z')
-            return (char) (character != 'z' ? character + 1 : 'A');
-        else if (character >= '0' && character <= '9')
-            return (char) (character != '9' ? character + 1 : '0');
-        else return '0';
-    }
 }
